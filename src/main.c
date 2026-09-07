@@ -5,6 +5,7 @@
 #include "asciis.h"
 #include "info.h"
 
+
 void help(void) {
     printf(
         "lordfetch - System Information Tool\n"

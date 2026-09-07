@@ -9,4 +9,6 @@ extern char uptime[64];
 
 void get_system_info(void);
 
+void get_distro();
+
 #endif
