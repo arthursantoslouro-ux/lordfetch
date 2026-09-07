@@ -4,9 +4,9 @@
 
 
 
-O que é um Fetch?
+# O que é um Fetch?
 
-Um fetch é uma ferramenta de terminal que exibe informações sobre o sistema operacional diretamente no terminal.
+**Um fetch é uma ferramenta de terminal que exibe informações sobre o sistema operacional diretamente no terminal.**
 
 Normalmente, um system fetch mostra informações como:
 
@@ -21,7 +21,7 @@ Normalmente, um system fetch mostra informações como:
 
 Um fetch também pode exibir uma logo do sistema em ASCII, deixando o terminal mais personalizado.
 
-Exemplo
+## Exemplo
 
        /\_/\
       ( o.o )
@@ -55,4 +55,15 @@ Alguns projetos conhecidos desse tipo são:
 O LordFetch segue essa mesma ideia, apresentando informações do sistema de forma simples e personalizada.
 ::
 
- 
+
+
+
+
+
+# Nota
+
+**Ainda estou aprendendo a programar e estou longe de ser um bom programador. Este projeto faz parte do meu processo de aprendizado, então provavelmente existem erros, decisões questionáveis e coisas que poderiam ser feitas de uma forma muito melhor.**
+
+Mas é assim que se aprende
+
+
