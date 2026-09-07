@@ -57,8 +57,22 @@ void get_system_info(void)
         snprintf(uptime, sizeof(uptime), "Unknown");
     }
 }
-/*
-void get_distro() {
 
+void get_distro() {
+  char line[40];
+
+  FILE *distro_file = fopen("/etc/os-release", "r");
+
+  while (fgets(line, sizeof(line), distro_file)) {
+
+      char *resultado = strstr(line, "ID=");
+      char *id = resultado + 3;
+
+      printf("%s\n", id);
+    
+  }
+
+fclose(distro_file);
+  
 }
-*/
+

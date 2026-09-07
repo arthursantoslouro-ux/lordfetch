@@ -38,8 +38,8 @@ void processar_flags(int argc, char *argv[]) {
 int main(int argc, char *argv[])
 {
   processar_flags(argc, argv);  
-  ascii("archlinux");
-  get_system_info();
-  printf("%s", os);
+//  ascii(""); 
+//  get_system_info();  
+  get_distro();
   return 0;
 }

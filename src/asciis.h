@@ -1,6 +1,6 @@
 #ifndef ASCII_H
-#define ASCII_H
+ #define ASCII_H
 
-void ascii(char distro[40]);
+void ascii(char path[50]);
 
 #endif
