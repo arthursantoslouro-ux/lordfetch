@@ -62,17 +62,20 @@ void get_distro() {
   char line[40];
 
   FILE *distro_file = fopen("/etc/os-release", "r");
+  
+  if (distro_file == NULL) {
+    printf("lordfetch: this file is null\n");
+  }
 
   while (fgets(line, sizeof(line), distro_file)) {
 
-      char *resultado = strstr(line, "ID=");
-      char *id = resultado + 3;
+//       char *resultado = strstr(line, "ID=");
+   
+    if (strncmp(line, "ID=", 3) == 0) {
+        printf("%s", line + 3); 
 
-      printf("%s\n", id);
-    
-  }
-
+    }
 fclose(distro_file);
-  
+  }  
 }
 
