@@ -4,7 +4,7 @@
 #include <string.h>
 #include "asciis.h"
 #include "info.h"
-
+#include "show.h"
 
 void help(void) {
     printf(
@@ -42,5 +42,6 @@ int main(int argc, char *argv[])
 //  ascii(""); 
 //  get_system_info();  
   get_distro();
+  show();
   return 0;
 }

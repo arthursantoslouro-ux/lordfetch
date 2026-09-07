@@ -10,6 +10,7 @@ char kernel[128];
 char arch[64];
 char hostname[128];
 char uptime[64];
+char distro[64];
 
 void get_system_info(void)
 {
@@ -65,6 +66,8 @@ void get_distro() {
   
   if (distro_file == NULL) {
     printf("lordfetch: this file is null\n");
+    return;
+    fclose(distro_file);
   }
 
   while (fgets(line, sizeof(line), distro_file)) {
@@ -72,10 +75,13 @@ void get_distro() {
 //       char *resultado = strstr(line, "ID=");
    
     if (strncmp(line, "ID=", 3) == 0) {
-        printf("%s", line + 3); 
+        strcpy(distro, line + 3);
+        
+          size_t  pos = strcspn(distro, "\n");
+          distro[pos] = '\0';
 
     }
-fclose(distro_file);
   }  
+fclose(distro_file);
 }
 

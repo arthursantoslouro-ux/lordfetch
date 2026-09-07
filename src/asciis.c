@@ -2,14 +2,8 @@
 #include "asciis.h"
 #include <string.h>
 
-void ascii(char path[50]) {
+void ascii(char nome_distro[64])
+{
   
-  char linha[100];
-
-  FILE *arquivo = fopen(path, "r");
-  
-  while (fgets(linha, sizeof(linha), arquivo)) {
-    printf("%s", linha);
-  }
-
 }
+
