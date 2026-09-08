@@ -28,7 +28,9 @@ void processar_flags(int argc, char *argv[]) {
   while (i < argc) {
     if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
       help();
+     
       break;
+      return;
     }
       i++;
   }
@@ -42,6 +44,8 @@ int main(int argc, char *argv[])
 //  ascii(""); 
 //  get_system_info();  
   get_distro();
-  show();
+//  show();
+    ascii();
+
   return 0;
 }

@@ -5,6 +5,9 @@
 
 #include "info.h"
 
+// struct passwd *pw = getpwuid(getuid());
+
+
 char os[64];
 char kernel[128];
 char arch[64];

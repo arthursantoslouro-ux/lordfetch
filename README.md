@@ -53,7 +53,7 @@ Alguns projetos conhecidos desse tipo são:
 * Screenfetch
 
 O LordFetch segue essa mesma ideia, apresentando informações do sistema de forma simples e personalizada.
-::
+
 
 
 
@@ -66,4 +66,4 @@ O LordFetch segue essa mesma ideia, apresentando informações do sistema de for
 
 Mas é assim que se aprende
 
-
+**me ajudem nesse projeto e chegaremos longe**

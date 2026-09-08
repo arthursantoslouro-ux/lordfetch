@@ -4,5 +4,5 @@
 #include <stdio.h>
 
 void show() {
-  printf("sua distro é %s", distro);
+  
 }
