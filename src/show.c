@@ -1,9 +1,9 @@
+#include <stdio.h>
 #include "show.h"
 #include "info.h"
 #include "asciis.h"
-#include <stdio.h>
 
-void show(void)
+void show(unsigned char *logo, unsigned int logo_len)
 {
     char linha_ascii[130];
     int info_pos = 0;
@@ -17,7 +17,7 @@ void show(void)
         distro
     };
 
-    while (ascii(linha_ascii, sizeof(linha_ascii))) {
+    while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
         printf("%-35s", linha_ascii);
 
         if (info_pos < 6)

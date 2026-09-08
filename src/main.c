@@ -5,6 +5,7 @@
 #include "asciis.h"
 #include "info.h"
 #include "show.h"
+#include "../build/logos.h"
 
 void help(void) {
     printf(
@@ -41,7 +42,8 @@ void processar_flags(int argc, char *argv[]) {
 int main(int argc, char *argv[])
 {
   processar_flags(argc, argv);  
+  get_system_info();
   get_distro();
-  show(); 
+  show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
   return 0;
 }

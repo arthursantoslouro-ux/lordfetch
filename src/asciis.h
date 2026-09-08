@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 
-int ascii(char *linha, size_t tamanho);
+int ascii(unsigned char *logo, unsigned int logo_len,
+          char *linha, size_t tamanho);
 
 #endif

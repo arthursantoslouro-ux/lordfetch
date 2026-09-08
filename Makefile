@@ -12,3 +12,7 @@ clean:
 
 run: $(TARGET)
 	./$(TARGET)
+
+
+debian:
+	proot-distro login debian

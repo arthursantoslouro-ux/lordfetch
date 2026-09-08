@@ -1,21 +1,14 @@
-#include <stdio.h>
-#include <string.h>
-#include "info.h"
 #include <stddef.h>
 #include "asciis.h"
-#include "../build/logos.h"
 
-int ascii(char *linha, size_t tamanho)
+int ascii(unsigned char *logo, unsigned int logo_len,
+          char *linha, size_t tamanho)
 {
     static size_t pos = 0;
-
-    const unsigned char *logo = src_logo_ascii_d_debian_txt;
-    unsigned int logo_len = src_logo_ascii_d_debian_txt_len;
+    size_t i = 0;
 
     if (pos >= logo_len || tamanho == 0)
         return 0;
-
-    size_t i = 0;
 
     while (pos < logo_len && i < tamanho - 1) {
         char c = logo[pos++];
@@ -30,6 +23,3 @@ int ascii(char *linha, size_t tamanho)
 
     return 1;
 }
-
-
-
