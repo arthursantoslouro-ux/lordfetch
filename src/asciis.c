@@ -1,23 +1,34 @@
 #include <stdio.h>
-#include "asciis.h"
 #include <string.h>
-#include "../build/logos.h"
 #include "info.h"
+#include <stddef.h>
+#include "asciis.h"
+#include "../build/logos.h"
 
-void ascii() {
-  get_distro();
-  
-  if (strstr(distro, "debian") != NULL) {
-    fwrite(src_logo_ascii_d_debian_txt, src_logo_ascii_d_debian_txt_len, 1, stdout);
-  
-  }
+int ascii(char *linha, size_t tamanho)
+{
+    static size_t pos = 0;
 
+    const unsigned char *logo = src_logo_ascii_d_debian_txt;
+    unsigned int logo_len = src_logo_ascii_d_debian_txt_len;
 
-  else if (strstr(distro, "arch") != NULL) {
-    fwrite(src_logo_ascii_a_arch_txt, src_logo_ascii_a_arch_txt_len, 1, stdout);
-  }
+    if (pos >= logo_len || tamanho == 0)
+        return 0;
 
+    size_t i = 0;
 
+    while (pos < logo_len && i < tamanho - 1) {
+        char c = logo[pos++];
+
+        if (c == '\n')
+            break;
+
+        linha[i++] = c;
+    }
+
+    linha[i] = '\0';
+
+    return 1;
 }
 
 

@@ -41,11 +41,7 @@ void processar_flags(int argc, char *argv[]) {
 int main(int argc, char *argv[])
 {
   processar_flags(argc, argv);  
-//  ascii(""); 
-//  get_system_info();  
   get_distro();
-//  show();
-    ascii();
-
+  show(); 
   return 0;
 }
