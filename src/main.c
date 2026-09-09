@@ -39,11 +39,49 @@ void processar_flags(int argc, char *argv[]) {
 
 
 
-int main(int argc, char *argv[])
-{
+
+
+
+int main(int argc, char *argv[]) {
   processar_flags(argc, argv);  
   get_system_info();
   get_distro();
-  show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
-  return 0;
+ 
+
+if (strstr(distro, "fedora") != NULL) {
+    show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
+    return 0;
+  }
+
+else if (strstr(distro, "arch") != NULL) {
+    show(src_logo_ascii_a_arch_txt, src_logo_ascii_a_arch_txt_len);
+    return 0;
+  }
+
+
+
+else if (strstr(distro, "ubuntu") != NULL) {
+    show(src_logo_ascii_u_ubuntu_txt, src_logo_ascii_u_ubuntu_txt_len);
+    return 0;
+  }
+
+
+else if (strstr(distro, "debian") != NULL) {
+    show(src_logo_ascii_d_debian_txt, src_logo_ascii_d_debian_txt_len);
+    return 0;
+  }
+
+
+
+return 0;
+
 }
+
+
+
+
+
+
+
+
+
