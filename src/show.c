@@ -34,7 +34,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         printf("%-35s", linha_ascii);
 
         if (info_pos < 6)
-            printf(" \t%s: %s", informacoes[inform++], infos[info_pos++]);
+            printf(" \t\033[32m%s:\033[0m %s", informacoes[inform++], infos[info_pos++]);
 
         putchar('\n');
     }
