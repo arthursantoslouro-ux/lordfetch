@@ -7,6 +7,7 @@ void show(unsigned char *logo, unsigned int logo_len)
 {
     char linha_ascii[130];
     int info_pos = 0;
+    int inform = 0;
 
     const char *infos[] = {
         os,
@@ -17,11 +18,23 @@ void show(unsigned char *logo, unsigned int logo_len)
         distro
     };
 
+  const char *informacoes[] = {
+      "os",
+      "kernel",
+      "arch",
+      "hostname",
+      "uptime",
+      "distro"
+      
+  };
+  
+
+
     while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
         printf("%-35s", linha_ascii);
 
         if (info_pos < 6)
-            printf("%s", infos[info_pos++]);
+            printf(" \t%s: %s", informacoes[inform++], infos[info_pos++]);
 
         putchar('\n');
     }
