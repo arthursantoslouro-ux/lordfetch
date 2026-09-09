@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
 
   else {
-    printf("lordfetch: unknow distro\n");
+    printf("lordfetch: unknown distro\n");
     return 0;
   }
 
