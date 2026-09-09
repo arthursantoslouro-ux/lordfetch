@@ -48,26 +48,60 @@ int main(int argc, char *argv[]) {
   get_distro();
  
 
-if (strstr(distro, "fedora") != NULL) {
-    show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
+  if (strstr(distro, "fedora") != NULL) {
+      show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
+      return 0;
+    }
+
+  else if (strstr(distro, "arch") != NULL) {
+      show(src_logo_ascii_a_arch_txt, src_logo_ascii_a_arch_txt_len);
+      return 0;
+    }
+
+
+
+  else if (strstr(distro, "ubuntu") != NULL) {
+      show(src_logo_ascii_u_ubuntu_txt, src_logo_ascii_u_ubuntu_txt_len);
+      return 0;
+    }
+
+
+  else if (strstr(distro, "debian") != NULL) {
+      show(src_logo_ascii_d_debian_txt, src_logo_ascii_d_debian_txt_len);
+      return 0;
+    }
+
+
+
+  else if (strstr(distro, "mint") != NULL) {
+    show(src_logo_ascii_l_linuxmint_txt, src_logo_ascii_l_linuxmint_txt_len);
     return 0;
   }
 
-else if (strstr(distro, "arch") != NULL) {
-    show(src_logo_ascii_a_arch_txt, src_logo_ascii_a_arch_txt_len);
+
+
+  else if (strstr(distro, "pop") != NULL) {
+    show(src_logo_ascii_p_pop_txt, src_logo_ascii_p_pop_txt_len);
     return 0;
   }
 
 
 
-else if (strstr(distro, "ubuntu") != NULL) {
-    show(src_logo_ascii_u_ubuntu_txt, src_logo_ascii_u_ubuntu_txt_len);
+
+  else if (strstr(distro, "gentoo") != NULL) {
+    show(src_logo_ascii_g_gentoo_txt, src_logo_ascii_g_gentoo_txt_len);
+    return 0;
+  }
+
+  else if (strstr(distro, "kali") != NULL) {
+    show(src_logo_ascii_k_kali_txt, src_logo_ascii_k_kali_txt_len);
     return 0;
   }
 
 
-else if (strstr(distro, "debian") != NULL) {
-    show(src_logo_ascii_d_debian_txt, src_logo_ascii_d_debian_txt_len);
+
+  else {
+    printf("lordfetch: unknow distro\n");
     return 0;
   }
 
