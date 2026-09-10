@@ -16,7 +16,7 @@ char hostname[128];
 char uptime[64];
 char distro[64];
 char shell[50];
-
+char cpu[128];
 
 void get_system_info(void)
 {
@@ -24,17 +24,7 @@ void get_system_info(void)
 
 
 /* pegar o shell */
-FILE *shell_file = popen("ps -eo comm= | grep -E '^(bash|zsh|fish)$' | head -n 1", "r");
 
-if (shell_file != NULL) {
-    if (fgets(shell, sizeof(shell), shell_file) != NULL) {
-        shell[strcspn(shell, "\n")] = '\0';
-    } else {
-        snprintf(shell, sizeof(shell), "%s", "Unknown");
-    }
-
-    pclose(shell_file);
-}
   
     /* Kernel, OS e arquitetura */
     if (uname(&system) == 0) {
@@ -105,3 +95,47 @@ void get_distro() {
 fclose(distro_file);
 }
 
+void get_cpu(void)
+{
+    FILE *file = fopen("/proc/cpuinfo", "r");
+
+    if (file == NULL) {
+        snprintf(cpu, sizeof(cpu), "Unknown");
+        return;
+    }
+
+    char line[256];
+
+    while (fgets(line, sizeof(line), file)) {
+
+        if (strncmp(line, "model name", 10) == 0) {
+            char *colon = strchr(line, ':');
+
+            if (colon != NULL) {
+                snprintf(cpu, sizeof(cpu), "%s", colon + 2);
+                cpu[strcspn(cpu, "\n")] = '\0';
+            }
+
+            break;
+        }
+
+        /*
+         * ARM/aarch64 normalmente não possui "model name".
+         */
+        if (strncmp(line, "Hardware", 8) == 0) {
+            char *colon = strchr(line, ':');
+
+            if (colon != NULL) {
+                snprintf(cpu, sizeof(cpu), "%s", colon + 2);
+                cpu[strcspn(cpu, "\n")] = '\0';
+            }
+
+            break;
+        }
+    }
+
+    fclose(file);
+
+    if (cpu[0] == '\0')
+        snprintf(cpu, sizeof(cpu), "Unknown");
+}

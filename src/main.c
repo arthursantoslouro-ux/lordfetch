@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
   processar_flags(argc, argv);  
   get_system_info();
   get_distro();
- 
+  get_cpu(); 
 
   if (strstr(distro, "fedora") != NULL) {
       show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);

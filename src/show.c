@@ -16,7 +16,8 @@ void show(unsigned char *logo, unsigned int logo_len)
         hostname,
         uptime,
         distro,
-        shell
+        shell,
+        cpu
   };
 
   const char *informacoes[] = {
@@ -26,8 +27,8 @@ void show(unsigned char *logo, unsigned int logo_len)
       "hostname",
       "uptime",
       "distro",
-      "shell"
-      
+      "shell",
+      "cpu"
       
   };
   
@@ -36,7 +37,7 @@ void show(unsigned char *logo, unsigned int logo_len)
     while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
         printf("%-35s", linha_ascii);
 
-        if (info_pos < 7)
+        if (info_pos < 8)
             printf(" \t\033[32m%s:\033[0m %s", informacoes[inform++], infos[info_pos++]);
 
         putchar('\n');
