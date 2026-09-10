@@ -17,7 +17,8 @@ char uptime[64];
 char distro[64];
 char shell[50];
 char cpu[128];
-
+char environment[50];
+ 
 void get_system_info(void)
 {
     struct utsname system;
@@ -60,12 +61,12 @@ void get_system_info(void)
                 minutes
             );
         } else {
-            snprintf(uptime, sizeof(uptime), "Unknown");
+            snprintf(uptime, sizeof(uptime), "");
         }
 
         fclose(file);
     } else {
-        snprintf(uptime, sizeof(uptime), "Unknown");
+        snprintf(uptime, sizeof(uptime), "");
     }
 }
 
@@ -75,7 +76,7 @@ void get_distro() {
   FILE *distro_file = fopen("/etc/os-release", "r");
   
   if (distro_file == NULL) {
-    printf("lordfetch: this file is null\n");
+//    printf("lordfetch: this file is null\n");
     return;
     fclose(distro_file);
   }
@@ -100,7 +101,7 @@ void get_cpu(void)
     FILE *file = fopen("/proc/cpuinfo", "r");
 
     if (file == NULL) {
-        snprintf(cpu, sizeof(cpu), "Unknown");
+        snprintf(cpu, sizeof(cpu), "");
         return;
     }
 
@@ -137,5 +138,5 @@ void get_cpu(void)
     fclose(file);
 
     if (cpu[0] == '\0')
-        snprintf(cpu, sizeof(cpu), "Unknown");
+        snprintf(cpu, sizeof(cpu), "");
 }

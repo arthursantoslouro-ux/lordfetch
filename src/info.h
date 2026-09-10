@@ -8,6 +8,8 @@ extern char uptime[64];
 extern char distro[64];
 extern char shell[50];
 extern char cpu[128];
+extern char environment[50];
+
 
 void get_system_info(void);
 void get_distro(void);

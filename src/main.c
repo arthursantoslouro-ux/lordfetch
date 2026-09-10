@@ -54,15 +54,17 @@ int main(int argc, char *argv[]) {
 if (is_android()) {
 
     if (is_termux()) {
-        show(src_logo_ascii_t_termux_txt, src_logo_ascii_t_termux_txt_len);
+      snprintf(environment, sizeof(environment), "%s", "android \033[1;33m(termux)\033[0m");
+      show(src_logo_ascii_t_termux_txt, src_logo_ascii_t_termux_txt_len);
 
     } else {
+      snprintf(environment, sizeof(environment), "%s", "android");
       show(src_logo_ascii_a_android_txt, src_logo_ascii_a_android_txt_len);
     }
 
     return 0;
 }
-
+ 
 
 
 
