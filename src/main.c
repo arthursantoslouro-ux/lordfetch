@@ -6,6 +6,7 @@
 #include "info.h"
 #include "show.h"
 #include "../build/logos.h"
+#include "environment.h"
 
 void help(void) {
     printf(
@@ -47,6 +48,29 @@ int main(int argc, char *argv[]) {
   get_system_info();
   get_distro();
   get_cpu(); 
+
+
+
+if (is_android()) {
+
+    if (is_termux()) {
+        show(src_logo_ascii_t_termux_txt, src_logo_ascii_t_termux_txt_len);
+
+    } else {
+      show(src_logo_ascii_a_android_txt, src_logo_ascii_a_android_txt_len);
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
 
   if (strstr(distro, "fedora") != NULL) {
       show(src_logo_ascii_f_fedora_txt, src_logo_ascii_f_fedora_txt_len);
