@@ -3,9 +3,9 @@
            .;looooooooc  .oooooooooo'
         .;looooool:,''.  :ooooooooooc
        ;looool;.         'oooooooooo,
-      ;clool'             .cooooooc.  ,,
+      ;clool'             .cooooooc. 
          ...                ......  .:oo,
-  .;clol:,.                        .loooo'
+  .;clol:,.                        .loooo
  :ooooooooo,                        'ooool
 'ooooooooooo.                        loooo.
 'ooooooooool                         coooo.
