@@ -55,7 +55,7 @@ if (is_android()) {
 
     if (is_termux()) {
       snprintf(environment, sizeof(environment), "%s", "android \033[1;33m(termux)\033[0m");
-      show(src_logo_ascii_t_termux_txt, src_logo_ascii_t_termux_txt_len);
+      show(src_logo_ascii_a_android_txt, src_logo_ascii_a_android_txt_len);
 
     } else {
       snprintf(environment, sizeof(environment), "%s", "android");
