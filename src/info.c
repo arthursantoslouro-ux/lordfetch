@@ -2,8 +2,9 @@
 #include <string.h>
 #include <sys/utsname.h>
 #include <unistd.h>
-
 #include "info.h"
+#include <stdlib.h>
+#include <pwd.h>
 
 // struct passwd *pw = getpwuid(getuid());
 
@@ -14,11 +15,27 @@ char arch[64];
 char hostname[128];
 char uptime[64];
 char distro[64];
+char shell[50];
+
 
 void get_system_info(void)
 {
     struct utsname system;
 
+
+/* pegar o shell */
+FILE *shell_file = popen("ps -eo comm= | grep -E '^(bash|zsh|fish)$' | head -n 1", "r");
+
+if (shell_file != NULL) {
+    if (fgets(shell, sizeof(shell), shell_file) != NULL) {
+        shell[strcspn(shell, "\n")] = '\0';
+    } else {
+        snprintf(shell, sizeof(shell), "%s", "Unknown");
+    }
+
+    pclose(shell_file);
+}
+  
     /* Kernel, OS e arquitetura */
     if (uname(&system) == 0) {
         snprintf(os, sizeof(os), "%s", system.sysname);

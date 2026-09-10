@@ -7,6 +7,7 @@ extern char arch[64];
 extern char hostname[128];
 extern char uptime[64];
 extern char distro[64];
+extern char shell[50];
 
 void get_system_info(void);
 
