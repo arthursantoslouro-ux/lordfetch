@@ -18,7 +18,8 @@ char distro[64];
 char shell[50];
 char cpu[128];
 char environment[50];
- 
+char ram[64];
+
 void get_system_info(void)
 {
     struct utsname system;
@@ -139,4 +140,33 @@ void get_cpu(void)
 
     if (cpu[0] == '\0')
         snprintf(cpu, sizeof(cpu), "");
+}
+
+
+
+void get_ram(void)
+{
+    FILE *file = fopen("/proc/meminfo", "r");
+
+    if (file == NULL)
+        return;
+
+    char line[128];
+
+    while (fgets(line, sizeof(line), file)) {
+        if (strncmp(line, "MemTotal:", 9) == 0) {
+            unsigned long ram_kb;
+
+            if (sscanf(line, "MemTotal: %lu kB", &ram_kb) == 1) {
+                double ram_gib = ram_kb / 1024.0 / 1024.0;
+
+                snprintf(ram, sizeof(ram),
+                         "%.2f GiB", ram_gib);
+            }
+
+            break;
+        }
+    }
+
+    fclose(file);
 }

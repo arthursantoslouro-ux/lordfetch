@@ -18,7 +18,8 @@ void show(unsigned char *logo, unsigned int logo_len)
         distro,
         shell,
         cpu,
-        environment
+        environment,
+        ram 
   };
 
   const char *informacoes[] = {
@@ -30,17 +31,17 @@ void show(unsigned char *logo, unsigned int logo_len)
       "distro",
       "shell",
       "cpu",
-      "environment"
-      
+      "environment",
+      "ram"      
   };
   
 while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
     printf("%-35s", linha_ascii);
 
-    while (info_pos < 9 && infos[info_pos][0] == '\0')
+    while (info_pos < 10 && infos[info_pos][0] == '\0')
         info_pos++;
 
-    if (info_pos < 9) {
+    if (info_pos < 10) {
         printf(" \t\033[32m%s:\033[0m %s",
                informacoes[info_pos],
                infos[info_pos]);

@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   get_system_info();
   get_distro();
   get_cpu(); 
-
+  get_ram();
 
 
 if (is_android()) {

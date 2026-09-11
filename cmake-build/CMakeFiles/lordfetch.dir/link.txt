@@ -1,0 +1,1 @@
+/data/data/com.termux/files/usr/bin/cc -O2 -g -DNDEBUG -Xlinker --dependency-file=CMakeFiles/lordfetch.dir/link.d CMakeFiles/lordfetch.dir/src/main.c.o CMakeFiles/lordfetch.dir/src/asciis.c.o CMakeFiles/lordfetch.dir/src/info.c.o CMakeFiles/lordfetch.dir/src/show.c.o CMakeFiles/lordfetch.dir/src/environment.c.o -o lordfetch
