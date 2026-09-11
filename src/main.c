@@ -44,8 +44,10 @@ int processar_flags(int argc, char *argv[]) {
             printf("lordfetch 0.1.0\n");
 
             return 1;
-        }
 
+    }
+      printf("lordfetch: unknown option '%s'\n", argv[i]);
+      return 1;
         i++;
     }
 
