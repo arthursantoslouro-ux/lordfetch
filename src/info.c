@@ -5,6 +5,10 @@
 #include "../headers/info.h"
 #include <stdlib.h>
 #include <pwd.h>
+#include <string.h>
+#include <arpa/inet.h>
+#include <ifaddrs.h>
+#include <netinet/in.h>
 
 
 
@@ -19,6 +23,7 @@ char cpu[128];
 char environment[50];
 char ram[64];
 char username[64];
+char ip[64];
 
 void get_system_info(void)
 {
@@ -145,7 +150,7 @@ void get_cpu(void)
 
 
 void get_ram(void)
-{
+{  
     FILE *file = fopen("/proc/meminfo", "r");
 
     if (file == NULL)
@@ -180,3 +185,43 @@ void get_username(void)
     if (pw != NULL)
         snprintf(username, sizeof(username), "%s", pw->pw_name);
 }
+
+
+void get_ip(void)
+{
+    struct ifaddrs *interfaces;
+    struct ifaddrs *interface;
+
+    ip[0] = '\0';
+
+    if (getifaddrs(&interfaces) == -1)
+        return;
+
+    for (interface = interfaces;
+         interface != NULL;
+         interface = interface->ifa_next) {
+
+        if (interface->ifa_addr == NULL)
+            continue;
+
+        if (interface->ifa_addr->sa_family != AF_INET)
+            continue;
+
+        struct sockaddr_in *addr =
+            (struct sockaddr_in *)interface->ifa_addr;
+
+        if (ntohl(addr->sin_addr.s_addr) == INADDR_LOOPBACK)
+            continue;
+
+        if (inet_ntop(
+                AF_INET,
+                &addr->sin_addr,
+                ip,
+                sizeof(ip)) != NULL) {
+            break;
+        }
+    }
+
+    freeifaddrs(interfaces);
+}
+

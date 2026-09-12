@@ -11,10 +11,12 @@ extern char cpu[128];
 extern char environment[50];
 extern char ram[64];
 extern char username[64];
+extern char ip[64];
 
 void get_system_info(void);
 void get_distro(void);
 void get_cpu(void);
 void get_ram(void);
 void get_username(void);
+void get_ip(void);
 #endif

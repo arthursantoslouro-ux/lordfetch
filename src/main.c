@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
     get_cpu();
     get_ram();
     get_username();
+    get_ip();
 
     if (is_android()) {
 
