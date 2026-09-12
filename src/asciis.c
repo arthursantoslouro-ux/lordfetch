@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "asciis.h"
+#include "../headers/asciis.h"
 
 int ascii(unsigned char *logo, unsigned int logo_len,
           char *linha, size_t tamanho)

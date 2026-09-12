@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "show.h"
-#include "info.h"
-#include "asciis.h"
+#include "../headers/show.h"
+#include "../headers/info.h"
+#include "../headers/asciis.h"
 
 void show(unsigned char *logo, unsigned int logo_len)
 {

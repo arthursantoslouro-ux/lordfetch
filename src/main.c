@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-#include "asciis.h"
-#include "info.h"
-#include "show.h"
+#include "../headers/asciis.h"
+#include "../headers/info.h"
+#include "../headers/show.h"
 #include "../build/logos.h"
-#include "environment.h"
+#include "../headers/environment.h"
 
 void help(void)
 {

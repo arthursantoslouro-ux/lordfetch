@@ -2,11 +2,10 @@
 #include <string.h>
 #include <sys/utsname.h>
 #include <unistd.h>
-#include "info.h"
+#include "../headers/info.h"
 #include <stdlib.h>
 #include <pwd.h>
 
-// struct passwd *pw = getpwuid(getuid());
 
 
 char os[64];
