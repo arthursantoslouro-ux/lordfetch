@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "environment.h"
 #include <string.h>
 
-#include "environment.h"
 
 int is_android(void)
 {

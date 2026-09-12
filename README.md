@@ -67,3 +67,11 @@ O LordFetch segue essa mesma ideia, apresentando informações do sistema de for
 Mas é assim que se aprende
 
 **me ajudem nesse projeto e chegaremos longe**
+
+
+
+
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License MIT">
+</p>
