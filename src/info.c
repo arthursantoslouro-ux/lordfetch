@@ -19,6 +19,7 @@ char shell[50];
 char cpu[128];
 char environment[50];
 char ram[64];
+char username[64];
 
 void get_system_info(void)
 {
@@ -169,4 +170,14 @@ void get_ram(void)
     }
 
     fclose(file);
+
+}
+
+
+void get_username(void)
+{
+    struct passwd *pw = getpwuid(getuid());
+
+    if (pw != NULL)
+        snprintf(username, sizeof(username), "%s", pw->pw_name);
 }
