@@ -1,77 +1,69 @@
-# lordfetch
+Lordfetch
 
-## lordfetch é um fetch open-source 
+Lordfetch is an open-source system information tool for the terminal.
 
+It displays useful information about your system directly in the terminal, along with customizable ASCII logos.
 
+What is a Fetch?
 
-# O que é um Fetch?
+A fetch is a terminal tool that displays information about the operating system and hardware in a simple and visually appealing way.
 
-**Um fetch é uma ferramenta de terminal que exibe informações sobre o sistema operacional diretamente no terminal.**
+A typical system fetch may display information such as:
 
-Normalmente, um system fetch mostra informações como:
+- Operating system
+- Kernel
+- CPU
+- RAM
+- Hostname
+- Shell
+- Uptime
+- Installed packages
 
-* Sistema operacional
-* Kernel
-* CPU
-* Memória RAM
-* Host
-* Shell
-* Uptime
-* Pacotes instalados
+Fetch tools can also display an ASCII logo alongside the system information, giving the terminal a more personalized appearance.
 
-Um fetch também pode exibir uma logo do sistema em ASCII, deixando o terminal mais personalizado.
-
-## Exemplo
+Example
 
        /\_/\
       ( o.o )
        > ^ <
 
-OS:      Linux
-Kernel:  6.8.0
-CPU:     AMD Ryzen
-Memory:  4.2 GiB / 16 GiB
-Shell:   bash
-Uptime:  2h 31m
+OS:       Linux
+Kernel:   6.8.0
+CPU:      AMD Ryzen
+Memory:   4.2 GiB / 16 GiB
+Shell:    bash
+Uptime:   2h 31m
 
-Para que serve?
+What is it useful for?
 
-Um fetch é útil para:
+A fetch can be useful for:
 
-* Mostrar rapidamente informações do computador.
-* Personalizar o terminal.
-* Compartilhar as especificações do sistema.
-* Criar uma identidade visual para o terminal.
-* Aprender sobre informações e comandos do sistema.
+- Quickly viewing system information.
+- Personalizing your terminal.
+- Sharing your system specifications.
+- Giving your terminal a unique visual identity.
+- Learning how operating systems expose system information.
 
-Exemplos de Fetch
+Examples of Fetch Tools
 
-Alguns projetos conhecidos desse tipo são:
+Some well-known projects in this category include:
 
-* Neofetch
-* Fastfetch
-* Screenfetch
+- "Neofetch" (https://github.com/dylanaraps/neofetch)
+- "Fastfetch" (https://github.com/fastfetch-cli/fastfetch)
+- "Screenfetch" (https://github.com/KittyKatt/screenFetch)
 
-O LordFetch segue essa mesma ideia, apresentando informações do sistema de forma simples e personalizada.
+Lordfetch follows the same general idea while being developed as a learning project, with a focus on simplicity, customization, and learning C.
 
+Note
 
+I'm still learning how to program, and I'm far from being a good programmer.
 
+This project is part of my learning process, so there are probably bugs, questionable design decisions, and things that could be implemented in much better ways.
 
+But that's how we learn.
 
-
-
-# Nota
-
-**Ainda estou aprendendo a programar e estou longe de ser um bom programador. Este projeto faz parte do meu processo de aprendizado, então provavelmente existem erros, decisões questionáveis e coisas que poderiam ser feitas de uma forma muito melhor.**
-
-Mas é assim que se aprende
-
-**me ajudem nesse projeto e chegaremos longe**
-
-
-
-
+Help me improve this project, and let's take Lordfetch far. 🚀
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License MIT">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License">
 </p>
