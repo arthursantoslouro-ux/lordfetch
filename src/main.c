@@ -6,6 +6,8 @@
 #include "../build/logos.h"
 #include "../headers/environment.h"
 
+
+
 void help(void)
 {
     printf(
@@ -17,11 +19,14 @@ void help(void)
         "Options:\n"
         "  -h, --help       Show this help message\n"
         "  -v, --version    Show version information\n"
+        "  --logo <file>    Use a custom ASCII/ANSI logo\n"
         "\n"
-        "Example:\n"
+        "Examples:\n"
         "  lordfetch --help\n"
+        "  lordfetch --logo ~/logo.ansi\n"
     );
 }
+
 
 int processar_flags(int argc, char *argv[])
 {
@@ -42,6 +47,17 @@ int processar_flags(int argc, char *argv[])
         return 1;
     }
 
+    if (strcmp(argv[1], "--logo") == 0) {
+    if (argc < 3) {
+        printf("lordfetch: --logo requires a file\n");
+        return 1;
+    }
+
+    show_logo(argc, argv);
+    return 1;
+}
+
+
     printf(
         "lordfetch: unknown option '%s'\n",
         argv[1]
@@ -52,17 +68,21 @@ int processar_flags(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    if (processar_flags(argc, argv))
+    
+
+get_system_info();
+get_distro();
+get_cpu();
+get_ram();
+get_username();
+get_ip();
+
+
+
+  if (processar_flags(argc, argv))
         return 0;
 
-    get_system_info();
-    get_distro();
-    get_cpu();
-    get_ram();
-    get_username();
-    get_ip();
-
-    if (is_android()) {
+      if (is_android()) {
 
         if (is_termux()) {
 
