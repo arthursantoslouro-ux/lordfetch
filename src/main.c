@@ -7,7 +7,6 @@
 #include "../headers/environment.h"
 
 
-
 void help(void)
 {
     printf(
@@ -48,15 +47,15 @@ int processar_flags(int argc, char *argv[])
     }
 
     if (strcmp(argv[1], "--logo") == 0) {
-    if (argc < 3) {
-        printf("lordfetch: --logo requires a file\n");
+
+        if (argc < 3) {
+            printf("lordfetch: --logo requires a file\n");
+            return 1;
+        }
+
+        show_logo(argc, argv);
         return 1;
     }
-
-    show_logo(argc, argv);
-    return 1;
-}
-
 
     printf(
         "lordfetch: unknown option '%s'\n",
@@ -66,23 +65,26 @@ int processar_flags(int argc, char *argv[])
     return 1;
 }
 
+
 int main(int argc, char *argv[])
 {
-    
+    /*
+     * Coleta as informações do sistema.
+     */
+    get_system_info();
+    get_distro();
+    get_cpu();
+    get_ram();
+    get_username();
+    get_ip();
 
-get_system_info();
-get_distro();
-get_cpu();
-get_ram();
-get_username();
-get_ip();
 
-
-
-  if (processar_flags(argc, argv))
-        return 0;
-
-      if (is_android()) {
+    /*
+     * Descobre o ambiente antes de processar
+     * as flags, para que o --logo também
+     * tenha acesso a essa informação.
+     */
+    if (is_android()) {
 
         if (is_termux()) {
 
@@ -102,6 +104,20 @@ get_ip();
                 "android"
             );
         }
+    }
+
+
+    /*
+     * Processa as flags.
+     */
+    if (processar_flags(argc, argv))
+        return 0;
+
+
+    /*
+     * Android
+     */
+    if (is_android()) {
 
         show(
             src_logo_ascii_a_android_txt,
@@ -111,6 +127,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Fedora
+     */
     if (strstr(distro, "fedora") != NULL) {
 
         show(
@@ -121,6 +141,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Arch Linux
+     */
     if (strstr(distro, "arch") != NULL) {
 
         show(
@@ -131,6 +155,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Ubuntu
+     */
     if (strstr(distro, "ubuntu") != NULL) {
 
         show(
@@ -141,6 +169,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Debian
+     */
     if (strstr(distro, "debian") != NULL) {
 
         show(
@@ -151,6 +183,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Linux Mint
+     */
     if (strstr(distro, "mint") != NULL) {
 
         show(
@@ -161,6 +197,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Pop!_OS
+     */
     if (strstr(distro, "pop") != NULL) {
 
         show(
@@ -171,6 +211,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Gentoo
+     */
     if (strstr(distro, "gentoo") != NULL) {
 
         show(
@@ -181,6 +225,10 @@ get_ip();
         return 0;
     }
 
+
+    /*
+     * Kali Linux
+     */
     if (strstr(distro, "kali") != NULL) {
 
         show(
@@ -191,9 +239,11 @@ get_ip();
         return 0;
     }
 
+
     printf(
         "lordfetch: unknown distro\n"
     );
 
     return 0;
 }
+
