@@ -128,6 +128,9 @@ int main(int argc, char *argv[])
     }
 
 
+
+
+
     /*
      * Fedora
      */
@@ -140,6 +143,20 @@ int main(int argc, char *argv[])
 
         return 0;
     }
+
+
+
+if (strstr(distro, "blackarch") != NULL) {
+
+    show(
+        src_logo_ascii_b_blackarch_txt,
+        src_logo_ascii_b_blackarch_txt_len
+    );
+
+    return 0;
+}
+
+
 
 
     /*
