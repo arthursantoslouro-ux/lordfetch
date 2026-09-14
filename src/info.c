@@ -225,3 +225,25 @@ void get_ip(void)
     freeifaddrs(interfaces);
 }
 
+
+void get_shell(void)
+{
+    const char *shell_env = getenv("SHELL");
+
+    if (shell_env == NULL)
+        return;
+
+    const char *nome = strrchr(shell_env, '/');
+
+    if (nome != NULL)
+        nome++;
+    else
+        nome = shell_env;
+
+    snprintf(
+        shell,
+        sizeof(shell),
+        "%s",
+        nome
+    );
+}

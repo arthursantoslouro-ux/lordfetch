@@ -41,7 +41,9 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         if (linha == 0) {
 
-            printf(" \033[1;32m%s@%s\033[0m", username, hostname);
+            printf(" \033[1;32m%s@%s\033[0m",
+                   username,
+                   hostname);
 
         } else if (linha == 1) {
 
@@ -53,6 +55,7 @@ void show(unsigned char *logo, unsigned int logo_len)
                 info_pos++;
 
             if (info_pos < 10) {
+
                 printf(" \033[32m%s:\033[0m %s",
                        informacoes[info_pos],
                        infos[info_pos]);
@@ -68,12 +71,49 @@ void show(unsigned char *logo, unsigned int logo_len)
     while (info_pos < 10) {
 
         if (infos[info_pos][0] != '\0') {
-            printf("%-35s \033[32m%s:\033[0m %s\n",
-                   "",
-                   informacoes[info_pos],
-                   infos[info_pos]);
+
+            printf(
+                "%-35s \033[32m%s:\033[0m %s\n",
+                "",
+                informacoes[info_pos],
+                infos[info_pos]
+            );
         }
 
         info_pos++;
     }
+
+    /*
+     * Cores ANSI normais
+     */
+    printf(
+        "%-35s "
+        "\033[40m    "
+        "\033[41m    "
+        "\033[42m    "
+        "\033[43m    "
+        "\033[44m    "
+        "\033[45m    "
+        "\033[46m    "
+        "\033[47m    "
+        "\033[0m\n",
+        ""
+    );
+
+    /*
+     * Cores ANSI brilhantes
+     */
+    printf(
+        "%-35s "
+        "\033[100m    "
+        "\033[101m    "
+        "\033[102m    "
+        "\033[103m    "
+        "\033[104m    "
+        "\033[105m    "
+        "\033[106m    "
+        "\033[107m    "
+        "\033[0m\n",
+        ""
+    );
 }

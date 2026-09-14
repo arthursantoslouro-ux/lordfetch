@@ -19,4 +19,5 @@ void get_cpu(void);
 void get_ram(void);
 void get_username(void);
 void get_ip(void);
+void get_shell(void);
 #endif

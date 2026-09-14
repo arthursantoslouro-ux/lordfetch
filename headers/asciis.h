@@ -12,4 +12,8 @@ int ascii(unsigned char *logo, unsigned int logo_len,
 
 void show_logo(int argc, char *argv[]);
 
+
+
+void show_colors(void);
+
 #endif

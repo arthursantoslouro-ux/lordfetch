@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
     get_ram();
     get_username();
     get_ip();
-
+    get_shell();
 
     /*
      * Descobre o ambiente antes de processar
