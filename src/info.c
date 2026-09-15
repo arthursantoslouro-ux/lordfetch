@@ -251,17 +251,87 @@ void get_shell(void)
 
 void get_packages(void)
 {
-    FILE *file = popen(
+    FILE *file = NULL;
+
+    /*
+     * Debian / Ubuntu / Mint / Kali
+     */
+    file = popen(
+        "command -v dpkg-query >/dev/null 2>&1 && "
         "dpkg-query -f '${binary:Package}\\n' -W 2>/dev/null | wc -l",
         "r"
     );
 
-    if (file == NULL)
-        return;
+    if (file != NULL) {
+        if (fgets(packages, sizeof(packages), file) != NULL &&
+            atoi(packages) > 0) {
+            packages[strcspn(packages, "\n")] = '\0';
+            pclose(file);
+            return;
+        }
 
-    if (fgets(packages, sizeof(packages), file) != NULL) {
-        packages[strcspn(packages, "\n")] = '\0';
+        pclose(file);
     }
 
-    pclose(file);
+    /*
+     * Arch / Manjaro
+     */
+    file = popen(
+        "command -v pacman >/dev/null 2>&1 && "
+        "pacman -Qq 2>/dev/null | wc -l",
+        "r"
+    );
+
+    if (file != NULL) {
+        if (fgets(packages, sizeof(packages), file) != NULL &&
+            atoi(packages) > 0) {
+            packages[strcspn(packages, "\n")] = '\0';
+            pclose(file);
+            return;
+        }
+
+        pclose(file);
+    }
+
+    /*
+     * Fedora / RHEL / openSUSE
+     */
+    file = popen(
+        "command -v rpm >/dev/null 2>&1 && "
+        "rpm -qa 2>/dev/null | wc -l",
+        "r"
+    );
+
+    if (file != NULL) {
+        if (fgets(packages, sizeof(packages), file) != NULL &&
+            atoi(packages) > 0) {
+            packages[strcspn(packages, "\n")] = '\0';
+            pclose(file);
+            return;
+        }
+
+        pclose(file);
+    }
+
+    /*
+     * Alpine
+     */
+    file = popen(
+        "command -v apk >/dev/null 2>&1 && "
+        "apk info 2>/dev/null | wc -l",
+        "r"
+    );
+
+    if (file != NULL) {
+        if (fgets(packages, sizeof(packages), file) != NULL &&
+            atoi(packages) > 0) {
+            packages[strcspn(packages, "\n")] = '\0';
+            pclose(file);
+            return;
+        }
+
+        pclose(file);
+    }
+
+    packages[0] = '\0';
 }
