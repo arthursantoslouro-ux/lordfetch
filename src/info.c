@@ -24,6 +24,7 @@ char environment[50];
 char ram[64];
 char username[64];
 char ip[64];
+char packages[64];
 
 void get_system_info(void)
 {
@@ -246,4 +247,21 @@ void get_shell(void)
         "%s",
         nome
     );
+}
+
+void get_packages(void)
+{
+    FILE *file = popen(
+        "dpkg-query -f '${binary:Package}\\n' -W 2>/dev/null | wc -l",
+        "r"
+    );
+
+    if (file == NULL)
+        return;
+
+    if (fgets(packages, sizeof(packages), file) != NULL) {
+        packages[strcspn(packages, "\n")] = '\0';
+    }
+
+    pclose(file);
 }

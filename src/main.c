@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     get_username();
     get_ip();
     get_shell();
-
+    get_packages();
     /*
      * Descobre o ambiente antes de processar
      * as flags, para que o --logo também
