@@ -1,0 +1,3 @@
+/data/data/com.termux/files/home/lordfetch/cmake-build/CMakeFiles/lordfetch.dir
+/data/data/com.termux/files/home/lordfetch/cmake-build/CMakeFiles/edit_cache.dir
+/data/data/com.termux/files/home/lordfetch/cmake-build/CMakeFiles/rebuild_cache.dir

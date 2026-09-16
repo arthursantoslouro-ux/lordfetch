@@ -25,6 +25,7 @@ char ram[64];
 char username[64];
 char ip[64];
 char packages[64];
+char distro_color[16];
 
 void get_system_info(void)
 {
@@ -101,6 +102,84 @@ void get_distro() {
     }
   }  
 fclose(distro_file);
+}
+
+
+void get_distro_color(void)
+{
+    if (strstr(distro, "arch") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[1;34m"
+        );
+
+    } else if (strstr(distro, "ubuntu") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[33m"
+        );
+
+    } else if (strstr(distro, "debian") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[31m"
+        );
+
+    } else if (strstr(distro, "fedora") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[34m"
+        );
+
+    } else if (strstr(distro, "mint") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[32m"
+        );
+
+    } else if (strstr(distro, "pop") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[36m"
+        );
+
+    } else if (strstr(distro, "gentoo") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[35m"
+        );
+
+    } else if (strstr(distro, "kali") != NULL) {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[36m"
+        );
+
+
+    } else {
+
+        snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[32m"
+        );
+    }
 }
 
 void get_cpu(void)

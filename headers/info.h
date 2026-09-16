@@ -13,7 +13,9 @@ extern char ram[64];
 extern char username[64];
 extern char ip[64];
 extern char packages[64];
+extern char distro_color[16];
 
+void get_distro_color(void);
 void get_system_info(void);
 void get_distro(void);
 void get_cpu(void);

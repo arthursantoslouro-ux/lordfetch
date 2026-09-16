@@ -53,14 +53,19 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         } else {
 
-            while (info_pos < 11 && infos[info_pos][0] == '\0')
+            while (info_pos < 11 &&
+                   infos[info_pos][0] == '\0') {
                 info_pos++;
+            }
 
             if (info_pos < 11) {
 
-                printf(" \033[32m%s:\033[0m %s",
-                       informacoes[info_pos],
-                       infos[info_pos]);
+                printf(
+                    " %s%s:\033[0m %s",
+                    distro_color,
+                    informacoes[info_pos],
+                    infos[info_pos]
+                );
 
                 info_pos++;
             }
@@ -75,8 +80,9 @@ void show(unsigned char *logo, unsigned int logo_len)
         if (infos[info_pos][0] != '\0') {
 
             printf(
-                "%-35s \033[32m%s:\033[0m %s\n",
+                "%-35s %s%s:\033[0m %s\n",
                 "",
+                distro_color,
                 informacoes[info_pos],
                 infos[info_pos]
             );
