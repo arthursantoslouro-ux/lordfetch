@@ -120,7 +120,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[33m"
+            "\033[1;33m"
         );
 
     } else if (strstr(distro, "debian") != NULL) {
@@ -128,7 +128,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[31m"
+            "\033[1;31m"
         );
 
     } else if (strstr(distro, "fedora") != NULL) {
@@ -136,7 +136,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[34m"
+            "\033[1;34m"
         );
 
     } else if (strstr(distro, "mint") != NULL) {
@@ -144,7 +144,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[32m"
+            "\033[1;32m"
         );
 
     } else if (strstr(distro, "pop") != NULL) {
@@ -152,7 +152,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[36m"
+            "\033[1;36m"
         );
 
     } else if (strstr(distro, "gentoo") != NULL) {
@@ -160,7 +160,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[35m"
+            "\033[1;35m"
         );
 
     } else if (strstr(distro, "kali") != NULL) {
@@ -168,7 +168,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[36m"
+            "\033[1;36m"
         );
 
 
@@ -177,7 +177,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[32m"
+            "\033[1;32m"
         );
     }
 }

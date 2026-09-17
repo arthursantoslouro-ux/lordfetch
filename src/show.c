@@ -43,7 +43,8 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         if (linha == 0) {
 
-            printf(" \033[1;32m%s@%s\033[0m",
+            printf(" %s%s@%s\033[0m",
+                   distro_color, 
                    username,
                    hostname);
 
