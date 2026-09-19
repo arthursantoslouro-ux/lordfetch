@@ -62,7 +62,7 @@ To build Lordfetch, you need:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/lordfetch.git && cd lordfetch
+git clone https://github.com/arthursantoslouro-ux/lordfetch.git && cd lordfetch
 ``` 
 
 # compile and run 
