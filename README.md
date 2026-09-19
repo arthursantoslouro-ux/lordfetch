@@ -70,6 +70,8 @@ git clone https://github.com/arthursantoslouro-ux/lordfetch.git && cd lordfetch
 ```bash
 cmake -S . -B cmake-build && cmake --build cmake-build && clear && ./cmake-build/lordfetch
 ```
+The executable will be located in cmake-build
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License: MIT">
