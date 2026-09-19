@@ -1,69 +1,77 @@
-Lordfetch
+# Lordfetch
 
-Lordfetch is an open-source system information tool for the terminal.
+**Lordfetch** is a system information tool for the terminal, written in C and inspired by tools such as Fastfetch and Neofetch.
 
-It displays useful information about your system directly in the terminal, along with customizable ASCII logos.
+This project was created as a way to learn C through practical development while working with Linux system information, ANSI colors, ASCII art, CMake, shell scripting, and terminal rendering.
 
-What is a Fetch?
+## Features
 
-A fetch is a terminal tool that displays information about the operating system and hardware in a simple and visually appealing way.
-
-A typical system fetch may display information such as:
+Lordfetch can display:
 
 - Operating system
 - Kernel
-- CPU
-- RAM
+- Architecture
 - Hostname
-- Shell
 - Uptime
-- Installed packages
+- Linux distribution
+- Shell
+- CPU
+- Environment
+- RAM
+- Username
+- IP address
+- Installed package count
 
-Fetch tools can also display an ASCII logo alongside the system information, giving the terminal a more personalized appearance.
+It also supports:
 
-Example
+- ASCII logos
+- ANSI colors
+- Linux distribution detection
+- Android detection
+- Termux detection
+- Package manager detection
+- Custom ASCII logos
+- CMake builds
 
-       /\_/\
-      ( o.o )
-       > ^ <
+## Supported Environments
 
-OS:       Linux
-Kernel:   6.8.0
-CPU:      AMD Ryzen
-Memory:   4.2 GiB / 16 GiB
-Shell:    bash
-Uptime:   2h 31m
+Lordfetch currently supports:
 
-What is it useful for?
+- Linux
+- Android
+- Termux
 
-A fetch can be useful for:
+Package detection currently supports:
 
-- Quickly viewing system information.
-- Personalizing your terminal.
-- Sharing your system specifications.
-- Giving your terminal a unique visual identity.
-- Learning how operating systems expose system information.
+- `dpkg`
+- `pacman`
+- `rpm`
+- `apk`
 
-Examples of Fetch Tools
+## Requirements
 
-Some well-known projects in this category include:
+To build Lordfetch, you need:
 
-- "Neofetch" (https://github.com/dylanaraps/neofetch)
-- "Fastfetch" (https://github.com/fastfetch-cli/fastfetch)
-- "Screenfetch" (https://github.com/KittyKatt/screenFetch)
+- A C compiler
+- CMake
+- `xxd`
+- Git
 
-Lordfetch follows the same general idea while being developed as a learning project, with a focus on simplicity, customization, and learning C.
+## Installation
 
-Note
+Clone the repository:
 
-I'm still learning how to program, and I'm far from being a good programmer.
+```bash
+git clone https://github.com/YOUR-USERNAME/lordfetch.git && cd lordfetch
+``` 
 
-This project is part of my learning process, so there are probably bugs, questionable design decisions, and things that could be implemented in much better ways.
+# compile and run 
 
-But that's how we learn.
-
-Help me improve this project, and let's take Lordfetch far. 🚀
+```bash
+cmake -S . -B cmake-build && cmake --build cmake-build && clear && ./cmake-build/lordfetch
+```
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License">
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License: MIT">
 </p>
+
