@@ -68,8 +68,6 @@ Compile and Run
 
 ```bash
 cmake -S . -B cmake-build && cmake --build cmake-build && clear && ./cmake-build/lordfetch
-
-The executable will be located in "cmake-build".
 ```
 
 <p align="center">
