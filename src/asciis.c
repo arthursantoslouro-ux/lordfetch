@@ -95,7 +95,8 @@ void show_logo(int argc, char *argv[])
          */
         if (linha == 0) {
 
-            printf("     \033[1;32m%s@%s\033[0m",
+            printf("     %s%s@%s",
+                   distro_color,
                    username,
                    hostname);
 
@@ -112,7 +113,8 @@ void show_logo(int argc, char *argv[])
 
             if (info_pos < 10) {
 
-                printf("     \033[32m%s:\033[0m %s",
+                printf("     %s%s: %s",
+                       distro_color,                       
                        informacoes[info_pos],
                        infos[info_pos]);
 
