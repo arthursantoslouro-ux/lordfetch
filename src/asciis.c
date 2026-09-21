@@ -42,7 +42,7 @@ void show_logo(int argc, char *argv[])
     FILE *arquivo = fopen(argv[2], "r");
 
     if (arquivo == NULL) {
-        printf("lordfetch: não foi possível abrir o logo\n");
+        printf("lordfetch: It wasn't possible to open the logo\n");
         return;
     }
 
