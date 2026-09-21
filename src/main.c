@@ -87,16 +87,8 @@ int main(int argc, char *argv[])
      */
     if (is_android()) {
 
-        if (is_termux()) {
 
-            snprintf(
-                environment,
-                sizeof(environment),
-                "%s",
-                "android \033[1;33m(termux)\033[0m"
-            );
-
-        } else {
+          
 
             snprintf(
                 environment,
@@ -104,7 +96,7 @@ int main(int argc, char *argv[])
                 "%s",
                 "android"
             );
-        }
+        
     }
 
 
