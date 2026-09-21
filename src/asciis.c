@@ -113,7 +113,7 @@ void show_logo(int argc, char *argv[])
 
             if (info_pos < 10) {
 
-                printf("     %s%s: %s\033[0m",
+                printf("     %s%s:\033[0m %s",
                        distro_color,                       
                        informacoes[info_pos],
                        infos[info_pos]);
