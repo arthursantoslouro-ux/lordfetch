@@ -8,17 +8,22 @@
 
 **Clone the repository:**
 
-git clone https://github.com/arthursantoslouro-ux/lordfetch.git
-cd lordfetch
+```bash
+git clone https://github.com/arthursantoslouro-ux/lordfetch.git && cd lordfetch
+```
 
-Build the project:
+**Build the project:**
 
+```bash
 cmake -S . -B cmake-build
 cmake --build cmake-build
+```
 
-Run Lordfetch:
+**Run Lordfetch:**
 
+```bash
 ./cmake-build/lordfetch
+```
 
 How to Contribute
 
