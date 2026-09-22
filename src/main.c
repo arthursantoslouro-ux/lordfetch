@@ -66,9 +66,19 @@ int processar_flags(int argc, char *argv[])
 }
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+
+
     /*
+     * Processa as flags.
+     */
+    if (processar_flags(argc, argv))
+        return 0;
+
+
+
+
+   /*
      * Coleta as informações do sistema.
      */
     get_system_info();
@@ -79,7 +89,7 @@ int main(int argc, char *argv[])
     get_ip();
     get_shell();
     get_packages();
-	get_distro_color();
+	  get_distro_color();
     /*
      * Descobre o ambiente antes de processar
      * as flags, para que o --logo também
@@ -98,14 +108,6 @@ int main(int argc, char *argv[])
             );
         
     }
-
-
-    /*
-     * Processa as flags.
-     */
-    if (processar_flags(argc, argv))
-        return 0;
-
 
     /*
      * Android
@@ -248,6 +250,22 @@ if (strstr(distro, "blackarch") != NULL) {
 
         return 0;
     }
+
+  /*
+  * alpine 
+    */
+    
+
+   if (strstr(distro, "alpine") != NULL) {
+
+        show(src_logo_ascii_a_alpine_txt, src_logo_ascii_a_alpine_txt_len);
+
+        return 0;
+    }
+
+
+  
+
 
 
     printf(

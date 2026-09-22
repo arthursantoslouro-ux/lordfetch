@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "../headers/show.h"
 #include "../headers/info.h"
 #include "../headers/asciis.h"
@@ -23,16 +24,16 @@ void show(unsigned char *logo, unsigned int logo_len)
     };
 
     const char *informacoes[] = {
-        "os",
-        "kernel",
-        "arch",
-        "uptime",
-        "distro",
-        "shell",
-        "cpu",
-        "environment",
-        "ram",
-        "ip",
+        "OS",
+        "Kernel",
+        "Arch",
+        "Uptime",
+        "Distro",
+        "Shell",
+        "CPU",
+        "Environment",
+        "RAM",
+        "IP",
     };
 
     while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
@@ -41,14 +42,22 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         if (linha == 0) {
 
-            printf(" %s%s@%s\033[0m",
+            printf(" %s%s\033[0m@%s%s\033[0m",
                    distro_color,
                    username,
-                   hostname);
+                   distro_color,
+                   hostname
+                   );
 
         } else if (linha == 1) {
 
-            printf(" ---------------------------");
+            int tamanho = strlen(username) + 1 + strlen(hostname);
+
+            printf(" ");
+
+            for (int i = 0; i < tamanho; i++) {
+                printf("-");
+            }
 
         } else {
 
@@ -72,7 +81,7 @@ void show(unsigned char *logo, unsigned int logo_len)
             } else if (info_pos == 10) {
 
                 printf(
-                    " %spackages:\033[0m %s (%s)",
+                    " %sPackages:\033[0m %s (%s)",
                     distro_color,
                     packages,
                     package_manager
@@ -91,7 +100,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         if (infos[info_pos][0] != '\0') {
 
             printf(
-                "%-35s %s%s:\033[0m %s\n",
+                "%-35s %s%s\033[0m: %s\n",
                 "",
                 distro_color,
                 informacoes[info_pos],
@@ -136,3 +145,4 @@ void show(unsigned char *logo, unsigned int logo_len)
         ""
     );
 }
+

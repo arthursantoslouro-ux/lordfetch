@@ -172,8 +172,13 @@ void get_distro_color(void)
             "\033[1;36m"
         );
 
+    }
 
-    } else {
+    else if (strstr(distro, "alpine") != NULL) {
+      snprintf(distro_color, sizeof(distro_color), "\033[1;35m");
+    }
+
+     else {
 
         snprintf(
             distro_color,
