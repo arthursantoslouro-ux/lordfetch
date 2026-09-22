@@ -1,5 +1,6 @@
 #ifndef INFO_H
 #define INFO_H
+
 extern char os[64];
 extern char kernel[128];
 extern char arch[64];
@@ -13,6 +14,7 @@ extern char ram[64];
 extern char username[64];
 extern char ip[64];
 extern char packages[64];
+extern char package_manager[32];
 extern char distro_color[16];
 
 void get_distro_color(void);

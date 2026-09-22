@@ -25,6 +25,7 @@ char ram[64];
 char username[64];
 char ip[64];
 char packages[64];
+char package_manager[32];
 char distro_color[16];
 
 void get_system_info(void)
@@ -342,7 +343,8 @@ void get_packages(void)
     );
 
     if (file != NULL) {
-        if (fgets(packages, sizeof(packages), file) != NULL &&
+      snprintf(package_manager, sizeof(package_manager), "%s", "dpkg");
+      if (fgets(packages, sizeof(packages), file) != NULL &&
             atoi(packages) > 0) {
             packages[strcspn(packages, "\n")] = '\0';
             pclose(file);
@@ -362,6 +364,7 @@ void get_packages(void)
     );
 
     if (file != NULL) {
+        snprintf(package_manager, sizeof(package_manager), "%s", "pacman");  
         if (fgets(packages, sizeof(packages), file) != NULL &&
             atoi(packages) > 0) {
             packages[strcspn(packages, "\n")] = '\0';
@@ -382,6 +385,7 @@ void get_packages(void)
     );
 
     if (file != NULL) {
+        snprintf(package_manager, sizeof(package_manager), "%s", "rpm");
         if (fgets(packages, sizeof(packages), file) != NULL &&
             atoi(packages) > 0) {
             packages[strcspn(packages, "\n")] = '\0';
@@ -402,6 +406,7 @@ void get_packages(void)
     );
 
     if (file != NULL) {
+        snprintf(package_manager, sizeof(package_manager), "%s", "apk");
         if (fgets(packages, sizeof(packages), file) != NULL &&
             atoi(packages) > 0) {
             packages[strcspn(packages, "\n")] = '\0';

@@ -20,7 +20,6 @@ void show(unsigned char *logo, unsigned int logo_len)
         environment,
         ram,
         ip,
-        packages
     };
 
     const char *informacoes[] = {
@@ -34,7 +33,6 @@ void show(unsigned char *logo, unsigned int logo_len)
         "environment",
         "ram",
         "ip",
-        "packages"
     };
 
     while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
@@ -44,7 +42,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         if (linha == 0) {
 
             printf(" %s%s@%s\033[0m",
-                   distro_color, 
+                   distro_color,
                    username,
                    hostname);
 
@@ -54,18 +52,30 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         } else {
 
-            while (info_pos < 11 &&
+            while (info_pos < 10 &&
                    infos[info_pos][0] == '\0') {
+
                 info_pos++;
             }
 
-            if (info_pos < 11) {
+            if (info_pos < 10) {
 
                 printf(
                     " %s%s:\033[0m %s",
                     distro_color,
                     informacoes[info_pos],
                     infos[info_pos]
+                );
+
+                info_pos++;
+
+            } else if (info_pos == 10) {
+
+                printf(
+                    " %spackages:\033[0m %s (%s)",
+                    distro_color,
+                    packages,
+                    package_manager
                 );
 
                 info_pos++;
@@ -76,7 +86,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         linha++;
     }
 
-    while (info_pos < 11) {
+    while (info_pos < 10) {
 
         if (infos[info_pos][0] != '\0') {
 
