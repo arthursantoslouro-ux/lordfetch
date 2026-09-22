@@ -69,14 +69,6 @@ int processar_flags(int argc, char *argv[])
 int main(int argc, char *argv[]) {
 
 
-    /*
-     * Processa as flags.
-     */
-    if (processar_flags(argc, argv))
-        return 0;
-
-
-
 
    /*
      * Coleta as informações do sistema.
@@ -90,24 +82,10 @@ int main(int argc, char *argv[]) {
     get_shell();
     get_packages();
 	  get_distro_color();
-    /*
-     * Descobre o ambiente antes de processar
-     * as flags, para que o --logo também
-     * tenha acesso a essa informação.
-     */
-    if (is_android()) {
-
-
-          
-
-            snprintf(
-                environment,
-                sizeof(environment),
-                "%s",
-                "android"
-            );
+    
         
-    }
+    if (processar_flags(argc, argv))
+    return 0;
 
     /*
      * Android
