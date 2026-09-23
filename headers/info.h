@@ -3,7 +3,6 @@
 
 extern char os[64];
 extern char kernel[128];
-extern char arch[64];
 extern char hostname[128];
 extern char uptime[64];
 extern char distro[64];
@@ -26,5 +25,6 @@ void get_username(void);
 void get_ip(void);
 void get_shell(void);
 void get_packages(void);
+void get_os_info(void);
 
 #endif

@@ -51,7 +51,6 @@ void show_logo(int argc, char *argv[])
     const char *infos[] = {
         os,
         kernel,
-        arch,
         uptime,
         distro,
         shell,
@@ -64,7 +63,6 @@ void show_logo(int argc, char *argv[])
     const char *informacoes[] = {
         "os",
         "kernel",
-        "arch",
         "uptime",
         "distro",
         "shell",

@@ -13,7 +13,6 @@ void show(unsigned char *logo, unsigned int logo_len)
     const char *infos[] = {
         os,
         kernel,
-        arch,
         uptime,
         distro,
         shell,
@@ -26,7 +25,6 @@ void show(unsigned char *logo, unsigned int logo_len)
     const char *informacoes[] = {
         "OS",
         "Kernel",
-        "Arch",
         "Uptime",
         "Distro",
         "Shell",
@@ -61,13 +59,13 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         } else {
 
-            while (info_pos < 10 &&
+            while (info_pos < 9 &&
                    infos[info_pos][0] == '\0') {
 
                 info_pos++;
             }
 
-            if (info_pos < 10) {
+            if (info_pos < 9) {
 
                 printf(
                     " %s%s:\033[0m %s",
@@ -78,7 +76,7 @@ void show(unsigned char *logo, unsigned int logo_len)
 
                 info_pos++;
 
-            } else if (info_pos == 10) {
+            } else if (info_pos == 9) {
 
                 printf(
                     " %sPackages:\033[0m %s (%s)",
@@ -95,7 +93,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         linha++;
     }
 
-    while (info_pos < 10) {
+    while (info_pos < 9) {
 
         if (infos[info_pos][0] != '\0') {
 

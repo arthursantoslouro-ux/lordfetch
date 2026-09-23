@@ -9,12 +9,11 @@
 #include <arpa/inet.h>
 #include <ifaddrs.h>
 #include <netinet/in.h>
-
+#include "../headers/environment.h"
 
 
 char os[64];
 char kernel[128];
-char arch[64];
 char hostname[128];
 char uptime[64];
 char distro[64];
@@ -40,11 +39,11 @@ void get_system_info(void)
     if (uname(&system) == 0) {
         snprintf(os, sizeof(os), "%s", system.sysname);
         snprintf(kernel, sizeof(kernel), "%s", system.release);
-        snprintf(arch, sizeof(arch), "%s", system.machine);
+  //snprintf(arch, sizeof(arch), "%s", system.machine);
     } else {
         snprintf(os, sizeof(os), "Unknown");
         snprintf(kernel, sizeof(kernel), "Unknown");
-        snprintf(arch, sizeof(arch), "Unknown");
+    //    snprintf(arch, sizeof(arch), "Unknown");
     }
 
     /* Hostname */
@@ -423,4 +422,70 @@ void get_packages(void)
     }
 
     packages[0] = '\0';
+}
+
+void get_os_info(void)
+{
+    struct utsname info;
+
+    if (uname(&info) != 0)
+        return;
+
+    if (is_android()) {
+
+        FILE *file = popen(
+            "getprop ro.build.version.release",
+            "r"
+        );
+
+        if (file == NULL)
+            return;
+
+        char version[16];
+
+        if (fgets(version, sizeof(version), file) != NULL) {
+
+            version[strcspn(version, "\n")] = '\0';
+
+            const char *codename = "Unknown";
+
+            if (strcmp(version, "17") == 0)
+                codename = "Cinnamon Bun";
+            else if (strcmp(version, "16") == 0)
+                codename = "Baklava";
+            else if (strcmp(version, "15") == 0)
+                codename = "Vanilla Ice Cream";
+            else if (strcmp(version, "14") == 0)
+                codename = "Upside Down Cake";
+            else if (strcmp(version, "13") == 0)
+                codename = "Tiramisu";
+            else if (strcmp(version, "12") == 0)
+                codename = "Snow Cone";
+            else if (strcmp(version, "11") == 0)
+                codename = "Red Velvet Cake";
+            else if (strcmp(version, "10") == 0)
+                codename = "Quince Tart";
+
+            snprintf(
+                os,
+                sizeof(os),
+                "Android %s %s %s",
+                codename,
+                version,
+                info.machine
+            );
+        }
+
+        pclose(file);
+
+    } else {
+
+        snprintf(
+            os,
+            sizeof(os),
+            "%s %s",
+            info.sysname,
+            info.machine
+        );
+    }
 }
