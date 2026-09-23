@@ -39,7 +39,7 @@ void get_system_info(void)
     /* Kernel, OS e arquitetura */
     if (uname(&system) == 0) {
         snprintf(os, sizeof(os), "%s", system.sysname);
-        snprintf(kernel, sizeof(kernel), "%s", system.release);
+        snprintf(kernel, sizeof(kernel), "%s %s", system.sysname, system.release);
   //snprintf(arch, sizeof(arch), "%s", system.machine);
     } else {
         snprintf(os, sizeof(os), "Unknown");
