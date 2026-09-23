@@ -31,9 +31,6 @@ int ascii(unsigned char *logo, unsigned int logo_len,
 
 
 
-
-
-
 void show_logo(int argc, char *argv[])
 {
     if (argc < 3)
@@ -50,26 +47,22 @@ void show_logo(int argc, char *argv[])
 
     const char *infos[] = {
         os,
+        host,
         kernel,
-        uptime,
-        distro,
         shell,
-        cpu,
-        environment,
         ram,
-        ip
+        ip,
+        packages
     };
 
     const char *informacoes[] = {
-        "os",
-        "kernel",
-        "uptime",
-        "distro",
-        "shell",
-        "cpu",
-        "environment",
-        "ram",
-        "ip"
+        "OS",
+        "Host",
+        "Kernel",
+        "Shell",
+        "Memory",
+        "Local IP",
+        "Packages"
     };
 
     int info_pos = 0;
@@ -77,44 +70,66 @@ void show_logo(int argc, char *argv[])
 
     while (fgets(linha_logo, sizeof(linha_logo), arquivo)) {
 
-        /* Remove o \n que o fgets colocou */
         linha_logo[strcspn(linha_logo, "\n")] = '\0';
 
-        /*
-         * Imprime o logo ANSI.
-         *
-         * 35 espaços depois do logo deixam um espaço
-         * para as informações do sistema.
-         */
         printf("%s", linha_logo);
 
-        /*
-         * Informações do sistema
-         */
         if (linha == 0) {
 
-            printf("     %s%s@%s",
-                   distro_color,
-                   username,
-                   hostname);
+            printf(
+                "     %s%s@%s\033[0m",
+                distro_color,
+                username,
+                hostname
+            );
 
         } else if (linha == 1) {
 
-            printf("     ---------------------------");
+            int tamanho =
+                strlen(username) +
+                1 +
+                strlen(hostname);
+
+            printf("     ");
+
+            for (int i = 0; i < tamanho; i++) {
+                printf("-");
+            }
 
         } else {
 
-            while (info_pos < 10 &&
-                   infos[info_pos][0] == '\0') {
-                info_pos++;
-            }
+            if (info_pos < 7 &&
+                infos[info_pos][0] != '\0') {
 
-            if (info_pos < 10) {
+                if (info_pos == 5) {
 
-                printf("     %s%s:\033[0m %s",
-                       distro_color,                       
-                       informacoes[info_pos],
-                       infos[info_pos]);
+                    printf(
+                        "     %s%s (%s):\033[0m %s",
+                        distro_color,
+                        informacoes[info_pos],
+                        network_interface,
+                        infos[info_pos]
+                    );
+
+                } else if (info_pos == 6) {
+
+                    printf(
+                        "     %s%s:\033[0m %s (%s)",
+                        distro_color,
+                        informacoes[info_pos],
+                        infos[info_pos],
+                        package_manager
+                    );
+
+                } else {
+
+                    printf(
+                        "     %s%s:\033[0m %s",
+                        distro_color,
+                        informacoes[info_pos],
+                        infos[info_pos]
+                    );
+                }
 
                 info_pos++;
             }
@@ -125,19 +140,39 @@ void show_logo(int argc, char *argv[])
         linha++;
     }
 
-    /*
-     * Se o logo acabar antes das informações,
-     * continua mostrando as informações abaixo.
-     */
-    while (info_pos < 10) {
+    while (info_pos < 7) {
 
         if (infos[info_pos][0] != '\0') {
 
-            printf(
-                "     \033[32m%s:\033[0m %s\n",
-                informacoes[info_pos],
-                infos[info_pos]
-            );
+            if (info_pos == 5) {
+
+                printf(
+                    "     %s%s (%s):\033[0m %s\n",
+                    distro_color,
+                    informacoes[info_pos],
+                    network_interface,
+                    infos[info_pos]
+                );
+
+            } else if (info_pos == 6) {
+
+                printf(
+                    "     %s%s:\033[0m %s (%s)\n",
+                    distro_color,
+                    informacoes[info_pos],
+                    infos[info_pos],
+                    package_manager
+                );
+
+            } else {
+
+                printf(
+                    "     %s%s:\033[0m %s\n",
+                    distro_color,
+                    informacoes[info_pos],
+                    infos[info_pos]
+                );
+            }
         }
 
         info_pos++;
@@ -145,6 +180,7 @@ void show_logo(int argc, char *argv[])
 
     fclose(arquivo);
 }
+
 
  void show_colors(void)
 {
