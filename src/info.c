@@ -113,7 +113,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[1;34m"
+            "\033[1;94m"
         );
 
     } else if (strstr(distro, "ubuntu") != NULL) {
