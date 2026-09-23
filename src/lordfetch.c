@@ -5,7 +5,7 @@
 #include "../headers/show.h"
 #include "../build/logos.h"
 #include "../headers/environment.h"
-
+#include "../headers/lordfetch.h"
 
 void help(void)
 {
@@ -42,7 +42,7 @@ int processar_flags(int argc, char *argv[])
     if (strcmp(argv[1], "-v") == 0 ||
         strcmp(argv[1], "--version") == 0) {
 
-        printf("lordfetch 0.1.0\n");
+        printf("lordfetch %s\n", LORDFETCH_VERSION);
         return 1;
     }
 
