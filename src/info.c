@@ -236,7 +236,7 @@ void get_cpu(void)
 
 
 void get_ram(void)
-{  
+{
     FILE *file = fopen("/proc/meminfo", "r");
 
     if (file == NULL)
@@ -244,23 +244,43 @@ void get_ram(void)
 
     char line[128];
 
+    unsigned long total_kb = 0;
+    unsigned long available_kb = 0;
+
     while (fgets(line, sizeof(line), file)) {
+
         if (strncmp(line, "MemTotal:", 9) == 0) {
-            unsigned long ram_kb;
-
-            if (sscanf(line, "MemTotal: %lu kB", &ram_kb) == 1) {
-                double ram_gib = ram_kb / 1024.0 / 1024.0;
-
-                snprintf(ram, sizeof(ram),
-                         "%.2f GiB", ram_gib);
-            }
-
-            break;
+            sscanf(line, "MemTotal: %lu kB", &total_kb);
         }
+
+        else if (strncmp(line, "MemAvailable:", 13) == 0) {
+            sscanf(line, "MemAvailable: %lu kB", &available_kb);
+        }
+
+        if (total_kb > 0 && available_kb > 0)
+            break;
     }
 
     fclose(file);
 
+    if (total_kb == 0)
+        return;
+
+    unsigned long used_kb = total_kb - available_kb;
+
+    double total_gib = total_kb / 1024.0 / 1024.0;
+    double used_gib = used_kb / 1024.0 / 1024.0;
+
+    int percent = (int)((used_kb * 100.0) / total_kb);
+
+    snprintf(
+        ram,
+        sizeof(ram),
+        "%.2f GiB / %.2f GiB (\033[33m%d%%\033[0m)",
+        used_gib,
+        total_gib,
+        percent
+    );
 }
 
 

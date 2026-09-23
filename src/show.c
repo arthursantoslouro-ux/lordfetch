@@ -32,7 +32,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         "Shell",
         "CPU",
         "Environment",
-        "RAM",
+        "Memory",
         "IP",
     };
 
