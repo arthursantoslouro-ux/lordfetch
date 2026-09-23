@@ -312,6 +312,7 @@ void get_ip(void)
 }
 
 
+
 void get_shell(void)
 {
     const char *shell_env = getenv("SHELL");
@@ -326,13 +327,104 @@ void get_shell(void)
     else
         nome = shell_env;
 
+    char command[128];
+
     snprintf(
-        shell,
-        sizeof(shell),
-        "%s",
+        command,
+        sizeof(command),
+        "%s --version 2>/dev/null",
         nome
     );
+
+    FILE *file = popen(command, "r");
+
+    if (file == NULL) {
+        snprintf(shell, sizeof(shell), "%s", nome);
+        return;
+    }
+
+    char version[256];
+
+    if (fgets(version, sizeof(version), file) == NULL) {
+        snprintf(shell, sizeof(shell), "%s", nome);
+        pclose(file);
+        return;
+    }
+
+    pclose(file);
+
+    version[strcspn(version, "\n")] = '\0';
+
+    char *version_number = NULL;
+
+    if (strcmp(nome, "zsh") == 0) {
+        /*
+         * zsh 5.9 (aarch64...)
+         */
+        char *p = strchr(version, ' ');
+
+        if (p != NULL)
+            version_number = p + 1;
+    }
+
+    else if (strcmp(nome, "bash") == 0) {
+        /*
+         * GNU bash, version 5.2.37(1)-release
+         */
+        char *p = strstr(version, "version ");
+
+        if (p != NULL)
+            version_number = p + 8;
+    }
+
+    else if (strcmp(nome, "fish") == 0) {
+        /*
+         * fish, version 4.0.1
+         */
+        char *p = strstr(version, "version ");
+
+        if (p != NULL)
+            version_number = p + 8;
+    }
+
+    if (version_number != NULL) {
+        /*
+         * Remove tudo depois do próximo espaço.
+         */
+        char *space = strchr(version_number, ' ');
+
+        if (space != NULL)
+            *space = '\0';
+
+        /*
+         * Bash pode retornar:
+         * 5.2.37(1)-release
+         *
+         * Remove o que vem depois do primeiro '('.
+         */
+        char *parenthesis = strchr(version_number, '(');
+
+        if (parenthesis != NULL)
+            *parenthesis = '\0';
+
+        snprintf(
+            shell,
+            sizeof(shell),
+            "%s %s",
+            nome,
+            version_number
+        );
+    }
+    else {
+        snprintf(
+            shell,
+            sizeof(shell),
+            "%s",
+            nome
+        );
+    }
 }
+
 
 void get_packages(void)
 {
