@@ -16,6 +16,7 @@ extern char packages[64];
 extern char package_manager[32];
 extern char distro_color[16];
 extern char host[128];
+extern char network_interface[32];
 
 void get_distro_color(void);
 void get_system_info(void);
@@ -28,5 +29,6 @@ void get_shell(void);
 void get_packages(void);
 void get_os_info(void);
 void get_host(void);
+
 
 #endif

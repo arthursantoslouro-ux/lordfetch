@@ -27,6 +27,7 @@ char packages[64];
 char package_manager[32];
 char distro_color[16];
 char host[128];
+char network_interface[32];
 
 void get_system_info(void)
 {
@@ -292,13 +293,13 @@ void get_username(void)
         snprintf(username, sizeof(username), "%s", pw->pw_name);
 }
 
-
 void get_ip(void)
 {
     struct ifaddrs *interfaces;
     struct ifaddrs *interface;
 
     ip[0] = '\0';
+    network_interface[0] = '\0';
 
     if (getifaddrs(&interfaces) == -1)
         return;
@@ -319,19 +320,49 @@ void get_ip(void)
         if (ntohl(addr->sin_addr.s_addr) == INADDR_LOOPBACK)
             continue;
 
+        char address[INET_ADDRSTRLEN];
+
         if (inet_ntop(
                 AF_INET,
                 &addr->sin_addr,
-                ip,
-                sizeof(ip)) != NULL) {
-            break;
+                address,
+                sizeof(address)) == NULL)
+            continue;
+
+        struct sockaddr_in *netmask =
+            (struct sockaddr_in *)interface->ifa_netmask;
+
+        unsigned int prefix = 0;
+
+        if (netmask != NULL) {
+            uint32_t mask = ntohl(netmask->sin_addr.s_addr);
+
+            while (mask) {
+                prefix += mask & 1;
+                mask >>= 1;
+            }
         }
+
+        snprintf(
+            network_interface,
+            sizeof(network_interface),
+            "%s",
+            interface->ifa_name
+        );
+
+        snprintf(
+            ip,
+            sizeof(ip),
+            "%s/%u",
+            address,
+            prefix
+        );
+
+        break;
     }
 
     freeifaddrs(interfaces);
 }
-
-
 
 void get_shell(void)
 {

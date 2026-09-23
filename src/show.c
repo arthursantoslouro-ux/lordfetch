@@ -12,7 +12,7 @@ void show(unsigned char *logo, unsigned int logo_len)
 
     const char *infos[] = {
         os,
-        host,   
+        host,
         kernel,
         uptime,
         distro,
@@ -33,7 +33,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         "CPU",
         "Environment",
         "Memory",
-        "IP",
+        "Local IP",
     };
 
     while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
@@ -42,16 +42,20 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         if (linha == 0) {
 
-            printf(" %s%s\033[0m@%s%s\033[0m",
-                   distro_color,
-                   username,
-                   distro_color,
-                   hostname
-                   );
+            printf(
+                " %s%s\033[0m@%s%s\033[0m",
+                distro_color,
+                username,
+                distro_color,
+                hostname
+            );
 
         } else if (linha == 1) {
 
-            int tamanho = strlen(username) + 1 + strlen(hostname);
+            int tamanho =
+                strlen(username) +
+                1 +
+                strlen(hostname);
 
             printf(" ");
 
@@ -69,12 +73,24 @@ void show(unsigned char *logo, unsigned int logo_len)
 
             if (info_pos < 10) {
 
-                printf(
-                    " %s%s:\033[0m %s",
-                    distro_color,
-                    informacoes[info_pos],
-                    infos[info_pos]
-                );
+                if (info_pos == 9) {
+
+                    printf(
+                        " %sLocal IP (%s):\033[0m %s",
+                        distro_color,
+                        network_interface,
+                        ip
+                    );
+
+                } else {
+
+                    printf(
+                        " %s%s:\033[0m %s",
+                        distro_color,
+                        informacoes[info_pos],
+                        infos[info_pos]
+                    );
+                }
 
                 info_pos++;
 
@@ -99,13 +115,26 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         if (infos[info_pos][0] != '\0') {
 
-            printf(
-                "%-35s %s%s\033[0m: %s\n",
-                "",
-                distro_color,
-                informacoes[info_pos],
-                infos[info_pos]
-            );
+            if (info_pos == 9) {
+
+                printf(
+                    "%-35s %sLocal IP (%s):\033[0m %s\n",
+                    "",
+                    distro_color,
+                    network_interface,
+                    ip
+                );
+
+            } else {
+
+                printf(
+                    "%-35s %s%s\033[0m: %s\n",
+                    "",
+                    distro_color,
+                    informacoes[info_pos],
+                    infos[info_pos]
+                );
+            }
         }
 
         info_pos++;
@@ -145,4 +174,3 @@ void show(unsigned char *logo, unsigned int logo_len)
         ""
     );
 }
-
