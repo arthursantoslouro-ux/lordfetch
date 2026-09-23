@@ -83,6 +83,7 @@ int main(int argc, char *argv[]) {
     get_packages();
 	  get_distro_color();
     get_os_info();
+    get_host();
         
     if (processar_flags(argc, argv))
     return 0;

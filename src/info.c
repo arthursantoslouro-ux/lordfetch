@@ -26,6 +26,7 @@ char ip[64];
 char packages[64];
 char package_manager[32];
 char distro_color[16];
+char host[128];
 
 void get_system_info(void)
 {
@@ -488,4 +489,54 @@ void get_os_info(void)
             info.machine
         );
     }
+
+}
+
+void get_host(void)
+{
+    FILE *file = popen(
+        "getprop ro.product.manufacturer",
+        "r"
+    );
+
+    if (file == NULL)
+        return;
+
+    char manufacturer[64];
+
+    if (fgets(manufacturer, sizeof(manufacturer), file) == NULL) {
+        pclose(file);
+        return;
+    }
+
+    manufacturer[strcspn(manufacturer, "\n")] = '\0';
+
+    pclose(file);
+
+    file = popen(
+        "getprop ro.product.model",
+        "r"
+    );
+
+    if (file == NULL)
+        return;
+
+    char model[64];
+
+    if (fgets(model, sizeof(model), file) == NULL) {
+        pclose(file);
+        return;
+    }
+
+    model[strcspn(model, "\n")] = '\0';
+
+    pclose(file);
+
+    snprintf(
+        host,
+        sizeof(host),
+        "%s %s",
+        manufacturer,
+        model
+    );
 }
