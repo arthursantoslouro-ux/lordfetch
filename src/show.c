@@ -4,9 +4,69 @@
 #include "../headers/info.h"
 #include "../headers/asciis.h"
 
+
+void print_logo_line(const char *line)
+{
+    int width = 0;
+
+    for (int i = 0; line[i] != '\0'; i++) {
+
+        if ((unsigned char)line[i] == 0x1b) {
+
+            i++;
+
+            if (line[i] == '[')
+                i++;
+
+            while (line[i] != '\0' && line[i] != 'm')
+                i++;
+
+            continue;
+        }
+
+        width++;
+    }
+
+    fputs(line, stdout);
+
+    while (width < 35) {
+        putchar(' ');
+        width++;
+    }
+}
+
+
+int line_is_ansi_only(const char *line)
+{
+    int has_ansi = 0;
+
+    for (int i = 0; line[i] != '\0'; i++) {
+
+        if ((unsigned char)line[i] != 0x1b)
+            return 0;
+
+        has_ansi = 1;
+
+        i++;
+
+        if (line[i] != '[')
+            return 0;
+
+        while (line[i] != '\0' && line[i] != 'm')
+            i++;
+
+        if (line[i] == '\0')
+            return 0;
+    }
+
+    return has_ansi;
+}
+
+
 void show(unsigned char *logo, unsigned int logo_len)
 {
     char linha_ascii[130];
+
     int info_pos = 0;
     int linha = 0;
 
@@ -36,9 +96,25 @@ void show(unsigned char *logo, unsigned int logo_len)
         "Local IP",
     };
 
-    while (ascii(logo, logo_len, linha_ascii, sizeof(linha_ascii))) {
+    while (ascii(
+        logo,
+        logo_len,
+        linha_ascii,
+        sizeof(linha_ascii)
+    )) {
 
-        printf("%-35s", linha_ascii);
+        /*
+         * Linhas que contêm somente códigos ANSI
+         * não devem ocupar espaço no layout.
+         */
+        if (line_is_ansi_only(linha_ascii)) {
+
+            printf("%s", linha_ascii);
+
+            continue;
+        }
+
+        print_logo_line(linha_ascii);
 
         if (linha == 0) {
 
@@ -60,8 +136,8 @@ void show(unsigned char *logo, unsigned int logo_len)
             printf(" ");
 
             for (int i = 0; i < tamanho; i++) {
-                printf("-");
-            }
+                printf("%s-\033[0m", distro_color);     
+      }
 
         } else {
 
@@ -108,6 +184,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         }
 
         putchar('\n');
+
         linha++;
     }
 

@@ -1,19 +1,20 @@
-                  -`
-                 .o+`
-                `ooo/
-               `+oooo:
-              `+oooooo:
-              -+oooooo+:
-            `/:-:++oooo+:
-           `/++++/+++++++:
-          `/++++++++++++++:
-         `/+++ooooooooooooo/`
-        ./ooosssso++osssssso+`
-       .oossssso-````/ossssss+`
-      -osssssso.      :ssssssso.
-     :osssssss/        osssso+++.
-    /ossssssss/        +ssssooo/-
-  `/ossssso+/:-        -:/+osssso+-
- `+sso+:-`                 `.-/+oso:
-`++:.                           `-/+/
-.`                                 `/
+@CYAN@                  -`
+@CYAN@                 .o+`
+@CYAN@                `ooo/
+@CYAN               `+oooo:
+@CYAN@              `+oooooo:
+@CYAN@              -+oooooo+:
+@CYAN@            `/:-:++oooo+:
+@CYAN@           `/++++/+++++++:
+@CYAN@          `/++++++++++++++:
+@CYAN@         `/+++ooooooooooooo/`
+@CYAN@        ./ooosssso++osssssso+`
+@CYAN@       .oossssso-````/ossssss+`
+@CYAN@      -osssssso.      :ssssssso.
+@CYAN@     :osssssss/        osssso+++.
+@CYAN@    /ossssssss/        +ssssooo/-
+@CYAN@  `/ossssso+/:-        -:/+osssso+-
+@CYAN@ `+sso+:-`                 `.-/+oso:
+@CYAN@`++:.                           `-/+/
+@CYAN@.`                                 `/
+@RESET@
