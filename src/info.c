@@ -149,12 +149,14 @@ void get_distro(void)
 
 void get_distro_color(void)
 {
-    if (strstr(distro, "arch") != NULL) {
+
+
+  if (strstr(distro, "arch") != NULL) {
 
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[1;94m"
+            "\033[1;36m"
         );
 
     } else if (strstr(distro, "ubuntu") != NULL) {
