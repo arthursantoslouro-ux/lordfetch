@@ -1061,10 +1061,20 @@ void get_host(void)
      * Linux / outros sistemas Unix:
      * usa o hostname normal.
      */
-    snprintf(
-        host,
-        sizeof(host),
-        "%s",
-        hostname
-    );
+    
+/*
+ * Linux / outros sistemas Unix:
+ * não exibe hostname genérico.
+ */
+if (strcmp(hostname, "localhost") == 0) {
+    host[0] = '\0';
+    return;
+}
+
+snprintf(
+    host,
+    sizeof(host),
+    "%s",
+    hostname
+);
 }
