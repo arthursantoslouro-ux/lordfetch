@@ -136,7 +136,7 @@ void show(unsigned char *logo, unsigned int logo_len)
             printf(" ");
 
             for (int i = 0; i < tamanho; i++) {
-                printf("%s-\033[0m", distro_color);     
+                printf("\033[0m-");     
       }
 
         } else {
