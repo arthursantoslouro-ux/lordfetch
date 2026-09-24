@@ -1,7 +1,7 @@
 @CYAN@                  -`
 @CYAN@                 .o+`
 @CYAN@                `ooo/
-@CYAN               `+oooo:
+@CYAN@               `+oooo:
 @CYAN@              `+oooooo:
 @CYAN@              -+oooooo+:
 @CYAN@            `/:-:++oooo+:

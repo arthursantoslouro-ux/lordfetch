@@ -5,43 +5,43 @@ OUTPUT="build/logos.h"
 
 mkdir -p build
 
-echo "/* Generated file. Do not edit. */" > "$OUTPUT"
+echo "/* Generated file. Do not edit. */" >"$OUTPUT"
 
 RED=$(printf '\033[31m')
 GREEN=$(printf '\033[32m')
 YELLOW=$(printf '\033[33m')
 BLUE=$(printf '\033[34m')
 MAGENTA=$(printf '\033[35m')
-CYAN=$(printf '\033[36m')
+CYAN=$(printf '\033[1;36m')
 WHITE=$(printf '\033[37m')
 BLACK=$(printf '\033[30m')
 RESET=$(printf '\033[0m')
 
 find "$INPUT" -type f -name "*.txt" | while read -r file; do
 
-    tmp=$(mktemp)
+  tmp=$(mktemp)
 
+  sed \
+    -e 's/@BLACK@/'"$BLACK"'/g' \
+    -e 's/@RED@/'"$RED"'/g' \
+    -e 's/@GREEN@/'"$GREEN"'/g' \
+    -e 's/@YELLOW@/'"$YELLOW"'/g' \
+    -e 's/@BLUE@/'"$BLUE"'/g' \
+    -e 's/@MAGENTA@/'"$MAGENTA"'/g' \
+    -e 's/@CYAN@/'"$CYAN"'/g' \
+    -e 's/@WHITE@/'"$WHITE"'/g' \
+    -e 's/@RESET@/'"$RESET"'/g' \
+    "$file" >"$tmp"
+
+  name=$(printf '%s' "$file" | sed 's|/|_|g; s|\.|_|g')
+
+  xxd -i "$tmp" |
     sed \
-        -e 's/@BLACK@/'"$BLACK"'/g' \
-        -e 's/@RED@/'"$RED"'/g' \
-        -e 's/@GREEN@/'"$GREEN"'/g' \
-        -e 's/@YELLOW@/'"$YELLOW"'/g' \
-        -e 's/@BLUE@/'"$BLUE"'/g' \
-        -e 's/@MAGENTA@/'"$MAGENTA"'/g' \
-        -e 's/@CYAN@/'"$CYAN"'/g' \
-        -e 's/@WHITE@/'"$WHITE"'/g' \
-        -e 's/@RESET@/'"$RESET"'/g' \
-        "$file" > "$tmp"
-
-    name=$(printf '%s' "$file" | sed 's|/|_|g; s|\.|_|g')
-
-    xxd -i "$tmp" |
-        sed \
-            "s/^unsigned char .*\\[\] = {/unsigned char ${name}[] = {/; \
+      "s/^unsigned char .*\\[\] = {/unsigned char ${name}[] = {/; \
              s/^unsigned int .*_len =/unsigned int ${name}_len =/;" \
-        >> "$OUTPUT"
+      >>"$OUTPUT"
 
-    rm -f "$tmp"
+  rm -f "$tmp"
 
 done
 
