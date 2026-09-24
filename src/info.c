@@ -234,13 +234,118 @@ void get_distro_color(void)
 
 void get_cpu(void)
 {
+    cpu[0] = '\0';
+
+    char model[128] = "";
+    char frequency[32] = "";
+    int cores = 0;
+
+    /*
+     * Android
+     */
+    if (is_android()) {
+
+        FILE *file = popen(
+            "getprop ro.soc.model 2>/dev/null",
+            "r"
+        );
+
+        if (file != NULL) {
+
+            if (fgets(model, sizeof(model), file) != NULL)
+                model[strcspn(model, "\n")] = '\0';
+
+            pclose(file);
+        }
+
+        /*
+         * Conta os CPUs disponíveis.
+         */
+        file = popen(
+            "grep -c '^processor' /proc/cpuinfo 2>/dev/null",
+            "r"
+        );
+
+        if (file != NULL) {
+
+            char line[32];
+
+            if (fgets(line, sizeof(line), file) != NULL)
+                cores = atoi(line);
+
+            pclose(file);
+        }
+
+        /*
+         * Frequência máxima do CPU.
+         */
+        file = popen(
+            "cat /sys/devices/system/cpu/cpu*/cpufreq/"
+            "cpuinfo_max_freq 2>/dev/null | sort -nr | head -n 1",
+            "r"
+        );
+
+        if (file != NULL) {
+
+            char line[32];
+
+            if (fgets(line, sizeof(line), file) != NULL) {
+
+                unsigned long khz =
+                    strtoul(line, NULL, 10);
+
+                if (khz > 0) {
+
+                    snprintf(
+                        frequency,
+                        sizeof(frequency),
+                        "%.2f GHz",
+                        khz / 1000000.0
+                    );
+                }
+            }
+
+            pclose(file);
+        }
+
+        if (strcmp(model, "MT6789") == 0) {
+
+            snprintf(
+                cpu,
+                sizeof(cpu),
+                "%s (2+6) @ %s",
+                model,
+                frequency[0] != '\0'
+                    ? frequency
+                    : "2.20 GHz"
+            );
+
+        } else if (model[0] != '\0') {
+
+            snprintf(
+                cpu,
+                sizeof(cpu),
+                "%s (%d) @ %s",
+                model,
+                cores,
+                frequency[0] != '\0'
+                    ? frequency
+                    : "unknown"
+            );
+        }
+
+        if (cpu[0] != '\0')
+            return;
+    }
+
+    /*
+     * Linux
+     */
     FILE *file =
         fopen("/proc/cpuinfo", "r");
 
-    if (file == NULL) {
-        cpu[0] = '\0';
+    if (file == NULL)
         return;
-    }
 
     char line[256];
 
@@ -253,22 +358,18 @@ void get_cpu(void)
             if (colon != NULL) {
 
                 snprintf(
-                    cpu,
-                    sizeof(cpu),
+                    model,
+                    sizeof(model),
                     "%s",
                     colon + 2
                 );
 
-                cpu[strcspn(cpu, "\n")] = '\0';
+                model[strcspn(model, "\n")] = '\0';
             }
 
             break;
         }
 
-        /*
-         * ARM/aarch64 normalmente não possui
-         * "model name".
-         */
         if (strncmp(line, "Hardware", 8) == 0) {
 
             char *colon = strchr(line, ':');
@@ -276,23 +377,94 @@ void get_cpu(void)
             if (colon != NULL) {
 
                 snprintf(
-                    cpu,
-                    sizeof(cpu),
+                    model,
+                    sizeof(model),
                     "%s",
                     colon + 2
                 );
 
-                cpu[strcspn(cpu, "\n")] = '\0';
+                model[strcspn(model, "\n")] = '\0';
             }
 
             break;
         }
     }
 
+    rewind(file);
+
+    while (fgets(line, sizeof(line), file)) {
+
+        if (strncmp(line, "processor", 9) == 0)
+            cores++;
+    }
+
     fclose(file);
 
-    if (cpu[0] == '\0')
-        cpu[0] = '\0';
+    /*
+     * Tenta obter a frequência máxima no Linux.
+     */
+    file = popen(
+        "cat /sys/devices/system/cpu/cpu*/cpufreq/"
+        "cpuinfo_max_freq 2>/dev/null | sort -nr | head -n 1",
+        "r"
+    );
+
+    if (file != NULL) {
+
+        char freq[32];
+
+        if (fgets(freq, sizeof(freq), file) != NULL) {
+
+            unsigned long khz =
+                strtoul(freq, NULL, 10);
+
+            if (khz > 0) {
+
+                snprintf(
+                    frequency,
+                    sizeof(frequency),
+                    "%.2f GHz",
+                    khz / 1000000.0
+                );
+            }
+        }
+
+        pclose(file);
+    }
+
+    if (model[0] == '\0')
+        return;
+
+    if (cores > 0 && frequency[0] != '\0') {
+
+        snprintf(
+            cpu,
+            sizeof(cpu),
+            "%s (%d) @ %s",
+            model,
+            cores,
+            frequency
+        );
+
+    } else if (cores > 0) {
+
+        snprintf(
+            cpu,
+            sizeof(cpu),
+            "%s (%d)",
+            model,
+            cores
+        );
+
+    } else {
+
+        snprintf(
+            cpu,
+            sizeof(cpu),
+            "%s",
+            model
+        );
+    }
 }
 
 
