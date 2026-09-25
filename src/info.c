@@ -33,16 +33,9 @@ void get_system_info(void)
     struct utsname system;
 
     /*
-     * Kernel, OS e arquitetura
+     * Kernel
      */
     if (uname(&system) == 0) {
-
-        snprintf(
-            os,
-            sizeof(os),
-            "%s",
-            system.sysname
-        );
 
         snprintf(
             kernel,
@@ -53,12 +46,6 @@ void get_system_info(void)
         );
 
     } else {
-
-        snprintf(
-            os,
-            sizeof(os),
-            "Unknown"
-        );
 
         snprintf(
             kernel,
@@ -905,7 +892,6 @@ void get_packages(void)
     package_manager[0] = '\0';
 }
 
-
 void get_os_info(void)
 {
     struct utsname info;
@@ -914,7 +900,7 @@ void get_os_info(void)
         return;
 
     /*
-     * Só usa getprop se for Android.
+     * Android
      */
     if (is_android()) {
 
@@ -932,7 +918,8 @@ void get_os_info(void)
         if (fgets(
                 version,
                 sizeof(version),
-                file) != NULL) {
+                file
+            ) != NULL) {
 
             version[
                 strcspn(version, "\n")
@@ -977,16 +964,85 @@ void get_os_info(void)
 
         pclose(file);
 
-    } else {
-
-        snprintf(
-            os,
-            sizeof(os),
-            "%s %s",
-            info.sysname,
-            info.machine
-        );
+        return;
     }
+
+    /*
+     * Linux / Unix
+     *
+     * Usa PRETTY_NAME do /etc/os-release.
+     */
+    FILE *file =
+        fopen("/etc/os-release", "r");
+
+    if (file != NULL) {
+
+        char line[256];
+
+        while (fgets(
+                line,
+                sizeof(line),
+                file
+            ) != NULL) {
+
+            if (strncmp(
+                    line,
+                    "PRETTY_NAME=",
+                    12
+                ) == 0) {
+
+                char *name =
+                    line + 12;
+
+                name[
+                    strcspn(name, "\n")
+                ] = '\0';
+
+                /*
+                 * Remove aspas iniciais.
+                 */
+                if (name[0] == '"')
+                    name++;
+
+                /*
+                 * Remove aspas finais.
+                 */
+                size_t len =
+                    strlen(name);
+
+                if (len > 0 &&
+                    name[len - 1] == '"') {
+
+                    name[len - 1] = '\0';
+                }
+
+                snprintf(
+                    os,
+                    sizeof(os),
+                    "%s %s",
+                    name,
+                    info.machine
+                );
+
+                fclose(file);
+
+                return;
+            }
+        }
+
+        fclose(file);
+    }
+
+    /*
+     * Fallback
+     */
+    snprintf(
+        os,
+        sizeof(os),
+        "%s %s",
+        info.sysname,
+        info.machine
+    );
 }
 
 

@@ -75,7 +75,6 @@ void show(unsigned char *logo, unsigned int logo_len)
         host,
         kernel,
         uptime,
-        distro,
         shell,
         cpu,
         environment,
@@ -88,7 +87,6 @@ void show(unsigned char *logo, unsigned int logo_len)
         "Host",
         "Kernel",
         "Uptime",
-        "Distro",
         "Shell",
         "CPU",
         "Environment",
@@ -136,20 +134,20 @@ void show(unsigned char *logo, unsigned int logo_len)
             printf(" ");
 
             for (int i = 0; i < tamanho; i++) {
-                printf("\033[0m-");     
-      }
+                printf("\033[0m-");
+            }
 
         } else {
 
-            while (info_pos < 10 &&
+            while (info_pos < 9 &&
                    infos[info_pos][0] == '\0') {
 
                 info_pos++;
             }
 
-            if (info_pos < 10) {
+            if (info_pos < 9) {
 
-                if (info_pos == 9) {
+                if (info_pos == 8) {
 
                     printf(
                         " %sLocal IP (%s):\033[0m %s",
@@ -170,7 +168,7 @@ void show(unsigned char *logo, unsigned int logo_len)
 
                 info_pos++;
 
-            } else if (info_pos == 10) {
+            } else if (info_pos == 9) {
 
                 printf(
                     " %sPackages:\033[0m %s (%s)",
@@ -188,11 +186,11 @@ void show(unsigned char *logo, unsigned int logo_len)
         linha++;
     }
 
-    while (info_pos < 10) {
+    while (info_pos < 9) {
 
         if (infos[info_pos][0] != '\0') {
 
-            if (info_pos == 9) {
+            if (info_pos == 8) {
 
                 printf(
                     "%-35s %sLocal IP (%s):\033[0m %s\n",
@@ -216,7 +214,6 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         info_pos++;
     }
-
     /*
      * Cores ANSI normais
      */
