@@ -145,9 +145,17 @@ void get_distro(void)
 void get_distro_color(void)
 {
 
+  if (is_android()) {
+            snprintf(
+            distro_color,
+            sizeof(distro_color),
+            "\033[1;32m"
+        );
 
-  if (strstr(distro, "arch") != NULL) {
 
+  }
+
+  else if (strstr(distro, "arch") != NULL) {
         snprintf(
             distro_color,
             sizeof(distro_color),
