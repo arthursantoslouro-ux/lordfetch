@@ -1,6 +1,6 @@
 #ifndef LORDFETCH_H
 #define LORDFETCH_H
 
-#define LORDFETCH_VERSION "0.1.0"
+#define LORDFETCH_VERSION "0.1.1"
 
 #endif
