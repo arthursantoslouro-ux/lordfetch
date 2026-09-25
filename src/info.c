@@ -9,7 +9,7 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include "../headers/environment.h"
-
+#include <sys/sysinfo.h>
 
 char os[64];
 char kernel[128];
@@ -27,7 +27,6 @@ char package_manager[32];
 char distro_color[16];
 char host[128];
 char network_interface[32];
-
 
 void get_system_info(void)
 {
@@ -83,38 +82,34 @@ void get_system_info(void)
     /*
      * Uptime
      */
-    FILE *file = fopen("/proc/uptime", "r");
+    uptime[0] = '\0';
 
-    if (file != NULL) {
+    struct sysinfo info;
 
-        double seconds;
+    if (sysinfo(&info) == 0) {
 
-        if (fscanf(file, "%lf", &seconds) == 1) {
+        unsigned long total =
+            (unsigned long)info.uptime;
 
-            int hours = (int)seconds / 3600;
-            int minutes = ((int)seconds % 3600) / 60;
+        unsigned long days =
+            total / 86400;
 
-            snprintf(
-                uptime,
-                sizeof(uptime),
-                "%dh %dm",
-                hours,
-                minutes
-            );
+        unsigned long hours =
+            (total % 86400) / 3600;
 
-        } else {
+        unsigned long minutes =
+            (total % 3600) / 60;
 
-            uptime[0] = '\0';
-        }
-
-        fclose(file);
-
-    } else {
-
-        uptime[0] = '\0';
+        snprintf(
+            uptime,
+            sizeof(uptime),
+            "%lud %luh %lum",
+            days,
+            hours,
+            minutes
+        );
     }
 }
-
 
 void get_distro(void)
 {
