@@ -35,6 +35,13 @@ void show_logo(int argc, char *argv[])
 {
     if (argc < 3)
         return;
+    
+    
+        else if (strstr(argv[2], "archlinux") != NULL) {
+          snprintf(distro, sizeof(distro), "archlinux");
+            snprintf(distro_color,  sizeof(distro_color), "\033[1;36m");
+        }
+ 
 
     FILE *arquivo = fopen(argv[2], "r");
 
