@@ -435,7 +435,9 @@ void get_cpu(void)
             "%s (%d) @ %s",
             model,
             cores,
+
             frequency
+
         );
 
     } else if (cores > 0) {

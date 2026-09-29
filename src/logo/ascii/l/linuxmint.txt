@@ -1,19 +1,19 @@
-            _.-ppOOOOOOqq-._
+            @BWHITE@_.-ppOOOOOOqq-._
          .oOOOOPPPPPPPPPPOOOOo.
-      .oOOOO.=oOOOOOOOOOOo=.OOOOo.
-    .:OOO.=oOOOOOOOOOOOOOOOOo=.OOO:.
-   .OOO.OOOOOOOOOOOOOOOOOOOOOOOO.OOO.
-  .OOO.OO    OOO:´   `::´    `:OOO.OO:
- .OOO.OOO    OO                OOO.OOO:
- OOO.OOOO    OO    oo    oo    OOOO.OOO
-:OOO:OOOO    OO    OO    OO    OOOO:OOO:
-:OOO:OOOO    OO    OO    OO    OOOO:OOO:
-'OOO'OOOO    OO    OO    OO    OOOO'OOO'
- OOO'OOOO    OO____OO____OO    OOOO'OOO'
- 'OOO'OOO    'OOOOOOOOOOOO'    OOOO'OOO
-  'OOO'OOO                    .OOO'OOO'
-   'OOO'OOOO:ooooooooooooooo:OOOO'OOO'
-    ':OOOo'=OOOOOOOOOOOOOOOOO='oOOO:'
-      ':OOOOo'=OOOOOOOOOOO='oOOOO:'
+      .oOOOO@GREEN@.=oOOOOOOOOOOo=.@BWHITE@OOOOo.
+    .:OOO@GREEN@.=oOOOOOOOOOOOOOOOOo=.@BWHITE@OOO:.
+   .OOO@GREEN@.OOOOOOOOOOOOOOOOOOOOOOOO.@BWHITE@OOO.
+  .OOO@GREEN@.OO    OOO:´   `::´    `:OOO.@BWHITE@OO:
+ .OOO@GREEN@.OOO    OO                OOO.@BWHITE@OOO:
+ OOO@GREEN@.OOOO    OO    oo    oo    OOOO.@BWHITE@OOO
+:OOO@GREEN@:OOOO    OO    OO    OO    OOOO:@BWHITE@OOO:
+:OOO@GREEN@:OOOO    OO    OO    OO    OOOO:@BWHITE@OOO:
+'OOO@GREEN@'OOOO    OO    OO    OO    OOOO'@BWHITE@OOO'
+ OOO@GREEN@'OOOO    OO____OO____OO    OOOO'@BWHITE@OOO'
+ 'OOO@GREEN@'OOO    'OOOOOOOOOOOO'    OOOO'@BWHITE@OOO
+  'OOO@GREEN@'OOO                    .OOO'@BWHITE@OOO'
+   'OOO@GREEN@'OOOO:ooooooooooooooo:OOOO'@BWHITE@OOO'
+    ':OOOo@GREEN@'=OOOOOOOOOOOOOOOOO='@BWHITE@oOOO:'
+      ':OOOOo@GREEN@'=OOOOOOOOOOO='@BWHITE@oOOOO:'
          ``-OOOOooooooooooOOOO-´´
              ```-=:OOOO:=-´´´

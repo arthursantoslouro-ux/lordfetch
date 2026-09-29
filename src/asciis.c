@@ -56,10 +56,13 @@ void show_logo(int argc, char *argv[])
         os,
         host,
         kernel,
+        uptime,
         shell,
+        cpu,
+        environment,
         ram,
         ip,
-        packages
+ 
     };
 
     const char *informacoes[] = {

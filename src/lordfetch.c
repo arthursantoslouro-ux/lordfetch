@@ -71,9 +71,28 @@ int processar_flags(int argc, char *argv[])
             return 1;
         }
 
+        
+
+        if (strcmp(argv[2], "android") == 0) {
+          snprintf(
+              distro_color,
+              sizeof(distro_color),
+              "\033[32m"
+              );
+        
+          show(
+              src_logo_ascii_a_android_txt,
+              src_logo_ascii_a_android_txt_len
+          );
+        
+        return 1;
+        }
+
+
         /*
          * Arch Linux
          */
+        
         if (strcmp(argv[2], "archlinux") == 0) {
 
             snprintf(
