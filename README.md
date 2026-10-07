@@ -1,4 +1,4 @@
-#Lordfetch
+# Lordfetch
 
 Lordfetch is a system information tool for the terminal, written in C and inspired by tools such as Fastfetch and Neofetch.
 
