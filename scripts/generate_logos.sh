@@ -18,23 +18,25 @@ WHITE=$(printf '\033[37m')
 BWHITE=$(printf '\033[1;37m')
 BLACK=$(printf '\033[30m')
 RESET=$(printf '\033[0m')
+BYELLOW=$(printf '\033[1;33m')
 
 find "$INPUT" -type f -name "*.txt" | while read -r file; do
 
   tmp=$(mktemp)
-sed \
-  -e 's/@BLACK@/'"$BLACK"'/g' \
-  -e 's/@RED@/'"$RED"'/g' \
-  -e 's/@GREEN@/'"$GREEN"'/g' \
-  -e 's/@BGREEN@/'"$BGREEN"'/g' \
-  -e 's/@YELLOW@/'"$YELLOW"'/g' \
-  -e 's/@BLUE@/'"$BLUE"'/g' \
-  -e 's/@MAGENTA@/'"$MAGENTA"'/g' \
-  -e 's/@CYAN@/'"$CYAN"'/g' \
-  -e 's/@WHITE@/'"$WHITE"'/g' \
-  -e 's/@BWHITE@/'"$BWHITE"'/g' \
-  -e 's/@RESET@/'"$RESET"'/g' \
-  "$file" >"$tmp"
+  sed \
+    -e 's/@BLACK@/'"$BLACK"'/g' \
+    -e 's/@RED@/'"$RED"'/g' \
+    -e 's/@GREEN@/'"$GREEN"'/g' \
+    -e 's/@BGREEN@/'"$BGREEN"'/g' \
+    -e 's/@YELLOW@/'"$YELLOW"'/g' \
+    -e 's/@BLUE@/'"$BLUE"'/g' \
+    -e 's/@MAGENTA@/'"$MAGENTA"'/g' \
+    -e 's/@CYAN@/'"$CYAN"'/g' \
+    -e 's/@WHITE@/'"$WHITE"'/g' \
+    -e 's/@BWHITE@/'"$BWHITE"'/g' \
+    -e 's/@RESET@/'"$RESET"'/g' \
+    -e 's/@BYELLOW@/'"$BYELLOW"'/g' \
+		"$file" >"$tmp"
 
   name=$(printf '%s' "$file" | sed 's|/|_|g; s|\.|_|g')
 
