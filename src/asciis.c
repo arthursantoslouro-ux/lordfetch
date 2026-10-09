@@ -12,10 +12,16 @@ int ascii(unsigned char *logo, unsigned int logo_len,
     static size_t pos = 0;
     size_t i = 0;
 
-    if (pos >= logo_len || tamanho == 0)
-        return 0;
 
-    while (pos < logo_len && i < tamanho - 1) {
+if (tamanho == 0)
+    return 0;
+
+if (pos >= logo_len) {
+    pos = 0;
+    return 0;
+}
+
+  while (pos < logo_len && i < tamanho - 1) {
         char c = logo[pos++];
 
         if (c == '\n')
