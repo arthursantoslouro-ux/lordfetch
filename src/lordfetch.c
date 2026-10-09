@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
 #include "../headers/asciis.h"
 #include "../headers/info.h"
 #include "../headers/show.h"
@@ -171,8 +170,8 @@ static void show_system(const char *logo_name)
              src_logo_ascii_a_alpine_txt_len);
     }
     else {
-        printf("lordfetch: unknown distro\n");
-    }
+      show(src_logo_ascii___fallback_txt, src_logo_ascii___fallback_txt_len);
+   }
 }
 
 int process_flags(int argc, char *argv[])

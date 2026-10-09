@@ -218,7 +218,7 @@ void get_distro_color(void)
         snprintf(
             distro_color,
             sizeof(distro_color),
-            "\033[1;32m"
+            "\033[1;37m"
         );
     }
 }
