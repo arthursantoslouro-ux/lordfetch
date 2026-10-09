@@ -519,7 +519,7 @@ void get_ram(void)
     snprintf(
         ram,
         sizeof(ram),
-        "%.2f GiB / %.2f GiB (\033[33m%d%%\033[0m)",
+        "%.2f GiB / %.2f GiB (\033[38;5;208m%d%%\033[0m)",
         used_gib,
         total_gib,
         percent
