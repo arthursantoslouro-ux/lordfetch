@@ -20,7 +20,7 @@ void help(void)
         "  -h, --help       Show this help message\n"
         "  -v, --version    Show version information\n"
         "  -w, --watch      Update system information continuously\n"
-        "  --logo <name>    Use a logo or custom ASCII/ANSI file\n"
+        "  -l, --logo <name>    Use a logo or custom ASCII/ANSI file\n"
         "\n"
         "Examples:\n"
         "  lordfetch --help\n"
@@ -198,11 +198,11 @@ int process_flags(int argc, char *argv[])
             continue;
         }
 
-        if (strcmp(argv[i], "--logo") == 0) {
+        if (strcmp(argv[i], "-l") == 0 || strcmp(argv[i], "--logo") == 0) {
             if (i + 1 >= argc ||
                 argv[i + 1][0] == '-') {
                 fprintf(stderr,
-                        "lordfetch: --logo requires a name or file\n");
+                        "lordfetch: -l/--logo requires a name or file\n");
                 return 1;
             }
 
