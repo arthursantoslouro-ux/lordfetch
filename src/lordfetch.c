@@ -45,6 +45,7 @@ static void update_info(void)
     get_distro_color();
     get_os_info();
     get_host();
+    get_terminal();
 }
 
 static int show_logo_by_name(const char *name)

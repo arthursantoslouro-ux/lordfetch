@@ -27,6 +27,7 @@ char package_manager[32];
 char distro_color[16];
 char host[128];
 char network_interface[32];
+char terminal[64];
 
 void get_system_info(void)
 {
@@ -1138,4 +1139,88 @@ snprintf(
     "%s",
     hostname
 );
+
+}
+
+
+void get_terminal(void)
+{
+    const char *name = NULL;
+    const char *version = NULL;
+    const char *term = getenv("TERM");
+    const char *program = getenv("TERM_PROGRAM");
+
+    terminal[0] = '\0';
+
+    /* Termux */
+    if (is_termux()) {
+        name = "Termux";
+        version = getenv("TERMUX_VERSION");
+    }
+    /* Variáveis específicas */
+    else if (getenv("KITTY_PID") != NULL) {
+        name = "kitty";
+    }
+    else if (getenv("WEZTERM_PANE") != NULL) {
+        name = "WezTerm";
+    }
+    else if (getenv("ALACRITTY_SOCKET") != NULL ||
+             getenv("ALACRITTY_LOG") != NULL) {
+        name = "Alacritty";
+    }
+    else if (getenv("GHOSTTY_RESOURCES_DIR") != NULL) {
+        name = "Ghostty";
+    }
+    else if (getenv("WT_SESSION") != NULL) {
+        name = "Windows Terminal";
+    }
+    /* Nome e versão declarados pelo terminal */
+    else if (program != NULL && program[0] != '\0') {
+        name = program;
+        version = getenv("TERM_PROGRAM_VERSION");
+    }
+    /* Alternativa baseada em TERM */
+    else if (term != NULL) {
+        if (strncmp(term, "xterm-kitty", 11) == 0 ||
+            strcmp(term, "kitty") == 0) {
+            name = "kitty";
+        }
+        else if (strncmp(term, "alacritty", 9) == 0) {
+            name = "Alacritty";
+        }
+        else if (strncmp(term, "wezterm", 7) == 0) {
+            name = "WezTerm";
+        }
+        else if (strncmp(term, "ghostty", 7) == 0) {
+            name = "Ghostty";
+        }
+        else if (strncmp(term, "foot", 4) == 0) {
+            name = "foot";
+        }
+        else if (strncmp(term, "xterm", 5) == 0) {
+            name = "xterm";
+        }
+        else if (strncmp(term, "screen", 6) == 0) {
+            name = "screen";
+        }
+        else if (strncmp(term, "tmux", 4) == 0) {
+            name = "tmux";
+        }
+    }
+
+    if (name == NULL) {
+        snprintf(terminal, sizeof(terminal), "Unknown");
+    }
+    else if (version != NULL && version[0] != '\0') {
+        snprintf(
+            terminal, sizeof(terminal),
+            "%s %s", name, version
+        );
+    }
+    else {
+        snprintf(
+            terminal, sizeof(terminal),
+            "%s", name
+        );
+    }
 }

@@ -17,7 +17,9 @@ extern char package_manager[32];
 extern char distro_color[16];
 extern char host[128];
 extern char network_interface[32];
+extern char terminal[64];
 
+void get_terminal(void);
 void get_distro_color(void);
 void get_system_info(void);
 void get_distro(void);

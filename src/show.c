@@ -80,6 +80,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         environment,
         ram,
         ip,
+        terminal
     };
 
     const char *informacoes[] = {
@@ -92,6 +93,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         "Environment",
         "Memory",
         "Local IP",
+        "Terminal"
     };
 
     while (ascii(
@@ -139,13 +141,13 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         } else {
 
-            while (info_pos < 9 &&
+            while (info_pos < 10 &&
                    infos[info_pos][0] == '\0') {
 
                 info_pos++;
             }
 
-            if (info_pos < 9) {
+            if (info_pos < 10) {
 
                 if (info_pos == 8) {
 
