@@ -16,5 +16,4 @@
 @CYAN@  `/ossssso+/:-        -:/+osssso+-
 @CYAN@ `+sso+:-`                 `.-/+oso:
 @CYAN@`++:.                           `-/+/
-@CYAN@.`                                 `/
-@RESET@
+

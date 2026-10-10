@@ -4,64 +4,75 @@
 #include "../headers/info.h"
 #include "../headers/asciis.h"
 
+#define LOGO_WIDTH 35
 
 void print_logo_line(const char *line)
 {
     int width = 0;
 
-    for (int i = 0; line[i] != '\0'; i++) {
+    for (int i = 0; line[i] != '\0';) {
+        unsigned char c = (unsigned char)line[i];
 
-        if ((unsigned char)line[i] == 0x1b) {
+        if (c == 0x1b && line[i + 1] == '[') {
+            i += 2;
 
-            i++;
-
-            if (line[i] == '[')
+            while (line[i] != '\0' &&
+                   !((unsigned char)line[i] >= 0x40 &&
+                     (unsigned char)line[i] <= 0x7e)) {
                 i++;
+            }
 
-            while (line[i] != '\0' && line[i] != 'm')
+            if (line[i] != '\0')
                 i++;
 
             continue;
         }
 
-        width++;
+        if ((c & 0xc0) != 0x80)
+            width++;
+
+        i++;
     }
 
     fputs(line, stdout);
 
-    while (width < 35) {
+    while (width < LOGO_WIDTH) {
         putchar(' ');
         width++;
     }
 }
 
-
 int line_is_ansi_only(const char *line)
 {
+    int i = 0;
     int has_ansi = 0;
 
-    for (int i = 0; line[i] != '\0'; i++) {
-
+    while (line[i] != '\0') {
         if ((unsigned char)line[i] != 0x1b)
             return 0;
-
-        has_ansi = 1;
 
         i++;
 
         if (line[i] != '[')
             return 0;
 
-        while (line[i] != '\0' && line[i] != 'm')
+        i++;
+
+        while (line[i] != '\0' &&
+               !((unsigned char)line[i] >= 0x40 &&
+                 (unsigned char)line[i] <= 0x7e)) {
             i++;
+        }
 
         if (line[i] == '\0')
             return 0;
+
+        i++;
+        has_ansi = 1;
     }
 
     return has_ansi;
 }
-
 
 void show(unsigned char *logo, unsigned int logo_len)
 {
@@ -102,22 +113,14 @@ void show(unsigned char *logo, unsigned int logo_len)
         linha_ascii,
         sizeof(linha_ascii)
     )) {
-
-        /*
-         * Linhas que contêm somente códigos ANSI
-         * não devem ocupar espaço no layout.
-         */
         if (line_is_ansi_only(linha_ascii)) {
-
             printf("%s", linha_ascii);
-
             continue;
         }
 
         print_logo_line(linha_ascii);
 
         if (linha == 0) {
-
             printf(
                 " %s%s\033[0m@%s%s\033[0m",
                 distro_color,
@@ -125,41 +128,31 @@ void show(unsigned char *logo, unsigned int logo_len)
                 distro_color,
                 hostname
             );
-
         } else if (linha == 1) {
-
             int tamanho =
                 strlen(username) +
                 1 +
                 strlen(hostname);
 
-            printf(" ");
+            putchar(' ');
 
-            for (int i = 0; i < tamanho; i++) {
-                printf("\033[0m-");
-            }
-
+            for (int i = 0; i < tamanho; i++)
+                putchar('-');
         } else {
-
             while (info_pos < 10 &&
                    infos[info_pos][0] == '\0') {
-
                 info_pos++;
             }
 
             if (info_pos < 10) {
-
                 if (info_pos == 8) {
-
                     printf(
                         " %sLocal IP (%s):\033[0m %s",
                         distro_color,
                         network_interface,
                         ip
                     );
-
                 } else {
-
                     printf(
                         " %s%s:\033[0m %s",
                         distro_color,
@@ -169,9 +162,8 @@ void show(unsigned char *logo, unsigned int logo_len)
                 }
 
                 info_pos++;
-
-            } else if (info_pos == 9) {
-
+            } else if (info_pos == 10 &&
+                       packages[0] != '\0') {
                 printf(
                     " %sPackages:\033[0m %s (%s)",
                     distro_color,
@@ -184,28 +176,24 @@ void show(unsigned char *logo, unsigned int logo_len)
         }
 
         putchar('\n');
-
         linha++;
     }
 
-    while (info_pos < 9) {
-
+    while (info_pos < 10) {
         if (infos[info_pos][0] != '\0') {
-
             if (info_pos == 8) {
-
                 printf(
-                    "%-35s %sLocal IP (%s):\033[0m %s\n",
+                    "%-*s %sLocal IP (%s):\033[0m %s\n",
+                    LOGO_WIDTH,
                     "",
                     distro_color,
                     network_interface,
                     ip
                 );
-
             } else {
-
                 printf(
-                    "%-35s %s%s\033[0m: %s\n",
+                    "%-*s %s%s:\033[0m %s\n",
+                    LOGO_WIDTH,
                     "",
                     distro_color,
                     informacoes[info_pos],
@@ -216,11 +204,9 @@ void show(unsigned char *logo, unsigned int logo_len)
 
         info_pos++;
     }
-    /*
-     * Cores ANSI normais
-     */
+
     printf(
-        "%-35s "
+        "%-*s "
         "\033[40m    "
         "\033[41m    "
         "\033[42m    "
@@ -230,14 +216,12 @@ void show(unsigned char *logo, unsigned int logo_len)
         "\033[46m    "
         "\033[47m    "
         "\033[0m\n",
+        LOGO_WIDTH,
         ""
     );
 
-    /*
-     * Cores ANSI brilhantes
-     */
     printf(
-        "%-35s "
+        "%-*s "
         "\033[100m    "
         "\033[101m    "
         "\033[102m    "
@@ -247,6 +231,7 @@ void show(unsigned char *logo, unsigned int logo_len)
         "\033[106m    "
         "\033[107m    "
         "\033[0m\n",
+        LOGO_WIDTH,
         ""
     );
 }
