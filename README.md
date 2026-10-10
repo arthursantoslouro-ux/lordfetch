@@ -57,12 +57,12 @@ To build Lordfetch, you need:
 - "xxd"
 - Git
 
-Installation
+# Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/arthursantoslouro-ux/lordfetch.git && cd lordfetch
+git clone --depth 1 https://github.com/arthursantoslouro-ux/lordfetch.git && cd lordfetch
 ```
 Compile and Run
 
