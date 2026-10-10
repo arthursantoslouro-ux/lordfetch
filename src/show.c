@@ -137,7 +137,7 @@ void show(unsigned char *logo, unsigned int logo_len)
             putchar(' ');
 
             for (int i = 0; i < tamanho; i++)
-                putchar('-');
+              printf("\033[0m-");
         } else {
             while (info_pos < 10 &&
                    infos[info_pos][0] == '\0') {
