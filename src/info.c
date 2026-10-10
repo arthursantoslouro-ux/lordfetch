@@ -1197,9 +1197,6 @@ void get_terminal(void)
         else if (strncmp(term, "foot", 4) == 0) {
             name = "foot";
         }
-        else if (strncmp(term, "xterm", 5) == 0) {
-            name = "xterm";
-        }
         else if (strncmp(term, "screen", 6) == 0) {
             name = "screen";
         }
@@ -1208,9 +1205,10 @@ void get_terminal(void)
         }
     }
 
-    if (name == NULL) {
-        snprintf(terminal, sizeof(terminal), "Unknown");
-    }
+	if (name == NULL) {
+	    terminal[0] = '\0';
+	    return;
+	}
     else if (version != NULL && version[0] != '\0') {
         snprintf(
             terminal, sizeof(terminal),
