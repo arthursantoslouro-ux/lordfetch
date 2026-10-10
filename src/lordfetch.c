@@ -192,7 +192,7 @@ int process_flags(int argc, char *argv[])
             return 1;
         }
 
-        if (strcmp(argv[i], "-c") == 0) {
+        if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--watch") == 0) {
             continuous = 1;
             continue;
         }
